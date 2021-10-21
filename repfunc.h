@@ -35,3 +35,14 @@ std::wstring IntToHexW(std::intmax_t n, size_t width);
 std::wstring FloatToStrW(double n);
 std::wstring FloatToStrW(double n, size_t width, size_t precision, bool left);
 
+
+
+/*******************************************************************************
+ * sleep a thread using STL
+ *   s         - seconds
+ *   ms        - milliseconds
+ *   us        - microseconds
+ ******************************************************************************/
+void Sleep(size_t s);
+void mSleep(size_t ms);
+void uSleep(size_t us);
