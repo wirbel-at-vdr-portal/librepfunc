@@ -9,6 +9,9 @@
 
 /*******************************************************************************
  * number conversion to std::string
+ *   n      - number
+ *   digits - minimum number of digits to print
+ *   left   - left or right text padding
  ******************************************************************************/
 std::string IntToStr(std::intmax_t n);
 std::string IntToStr(std::intmax_t n, size_t digits, bool left);
@@ -17,6 +20,9 @@ std::string IntToStr(std::intmax_t n, size_t digits, bool left);
 
 /*******************************************************************************
  * number conversion to std::wstring
+ *   n      - number
+ *   digits - minimum number of digits to print
+ *   left   - left or right text padding
  ******************************************************************************/
 std::wstring IntToStrW(std::intmax_t n);
 std::wstring IntToStrW(std::intmax_t n, size_t digits, bool left);
