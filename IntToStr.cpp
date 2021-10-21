@@ -8,9 +8,9 @@
 
 
 template<class T>
-std::basic_string<T> IntToStrT(std::intmax_t n, size_t digits, T fillchar, bool left) {
+std::basic_string<T> IntToStrT(std::intmax_t n, size_t width, T fillchar, bool left) {
   std::basic_stringstream<T> ss;
-  ss << std::setfill(fillchar) << std::setw(digits);
+  ss << std::setfill(fillchar) << std::setw(width);
 
   if (left)
      ss << std::left;
@@ -27,8 +27,8 @@ std::string IntToStr(std::intmax_t n) {
 }
 
 
-std::string IntToStr(std::intmax_t n, size_t digits, bool left) {
-  return IntToStrT<char>(n, digits, ' ', left);
+std::string IntToStr(std::intmax_t n, size_t width, bool left) {
+  return IntToStrT<char>(n, width, ' ', left);
 }
 
 
@@ -37,6 +37,6 @@ std::wstring IntToStrW(std::intmax_t n) {
 }
 
 
-std::wstring IntToStrW(std::intmax_t n, size_t digits, bool left) {
-  return IntToStrT<wchar_t>(n, digits, (wchar_t)' ', left);
+std::wstring IntToStrW(std::intmax_t n, size_t width, bool left) {
+  return IntToStrT<wchar_t>(n, width, (wchar_t)' ', left);
 }
