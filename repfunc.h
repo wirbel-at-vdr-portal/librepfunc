@@ -15,7 +15,7 @@
  ******************************************************************************/
 std::string IntToStr(std::intmax_t n);
 std::string IntToStr(std::intmax_t n, size_t width, bool left);
-
+std::string IntToHex(std::intmax_t n, size_t width);
 
 
 /*******************************************************************************
@@ -26,3 +26,4 @@ std::string IntToStr(std::intmax_t n, size_t width, bool left);
  ******************************************************************************/
 std::wstring IntToStrW(std::intmax_t n);
 std::wstring IntToStrW(std::intmax_t n, size_t width, bool left);
+std::wstring IntToHexW(std::intmax_t n, size_t width);
