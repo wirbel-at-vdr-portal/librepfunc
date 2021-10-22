@@ -51,7 +51,7 @@ void uSleep(size_t us);
 
 /*******************************************************************************
  * HexDump() - print bytes human readable.
- *   intro     - intro (caption) for byte buffer.
+ *   intro     - caption string in utf8 (Note: 7bit ascii is valid utf8)
  *   buf       - pointer to buffer 
  *   len       - length of buffer
  *   to_stderr - print to stderr, instead of stdout
