@@ -46,3 +46,16 @@ std::wstring FloatToStrW(double n, size_t width, size_t precision, bool left);
 void Sleep(size_t s);
 void mSleep(size_t ms);
 void uSleep(size_t us);
+
+
+
+/*******************************************************************************
+ * HexDump() - print bytes human readable.
+ *   intro     - intro (caption) for byte buffer.
+ *   buf       - pointer to buffer 
+ *   len       - length of buffer
+ *   to_stderr - print to stderr, instead of stdout
+ ******************************************************************************/
+void HexDump(std::string intro, const unsigned char* buf, size_t len, bool to_stderr = false);
+void HexDumpW(std::wstring intro, const unsigned char* buf, size_t len, bool to_stderr = false);
+
