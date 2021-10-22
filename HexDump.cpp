@@ -90,5 +90,5 @@ void HexDumpW(std::wstring intro, const unsigned char* buf, size_t len, bool to_
   if (intro.empty())
      intro = L"(null)";
   std::wstring_convert<std::codecvt_utf8<wchar_t>> Utf8;
-  hexdump(Utf8.to_bytes(intro), buf, len, to_stderr);
+  HexDump(Utf8.to_bytes(intro), buf, len, to_stderr);
 }
