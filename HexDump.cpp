@@ -6,8 +6,6 @@
 #include <iostream>  // std::cout, std::cerr
 #include <sstream>   // std::stringstream
 #include <iomanip>   // std::uppercase, std::setfill, std::setw, std::hex
-#include <codecvt>   // std::codecvt_utf8
-#include <locale>    // std::wstring_convert
 #include <cctype>    // std::isprint
 
 
@@ -89,6 +87,5 @@ void HexDump(std::string intro, const unsigned char* buf, size_t len, bool to_st
 void HexDumpW(std::wstring intro, const unsigned char* buf, size_t len, bool to_stderr) {
   if (intro.empty())
      intro = L"(null)";
-  std::wstring_convert<std::codecvt_utf8<wchar_t>> Utf8;
-  HexDump(Utf8.to_bytes(intro), buf, len, to_stderr);
+  HexDump(WStrToStr(intro), buf, len, to_stderr);
 }

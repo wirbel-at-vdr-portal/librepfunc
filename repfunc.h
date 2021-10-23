@@ -67,3 +67,11 @@ void HexDumpW(std::wstring intro, const unsigned char* buf, size_t len, bool to_
  ******************************************************************************/
 bool FileExists(std::string aFile);
 bool FileExistsW(std::wstring aFile);
+
+
+
+/*******************************************************************************
+ * Convert between UTF8 <-> UCS2 / UTF-32
+ ******************************************************************************/
+std::string  WStrToStr(std::wstring ws);
+std::wstring StrToWStr(std::string s);
