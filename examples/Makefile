@@ -105,7 +105,7 @@ all: librepfunc.so
 	$(CXX) $(CXXFLAGS) $(DEFINES) $(INCLUDES) IntToHex.cpp   -o IntToHex_example   $(LDFLAGS) $(LIBS)
 	$(CXX) $(CXXFLAGS) $(DEFINES) $(INCLUDES) HexDump.cpp    -o HexDump_example    $(LDFLAGS) $(LIBS)
 	$(CXX) $(CXXFLAGS) $(DEFINES) $(INCLUDES) Sleep.cpp      -o Sleep_example      $(LDFLAGS) $(LIBS)
-
+	$(CXX) $(CXXFLAGS) $(DEFINES) $(INCLUDES) FileExists.cpp -o FileExists_example $(LDFLAGS) $(LIBS)
 
 librepfunc.so:
 	$(LN_SF) ../librepfunc.so librepfunc.so

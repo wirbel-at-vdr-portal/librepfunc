@@ -59,3 +59,11 @@ void uSleep(size_t us);
 void HexDump(std::string intro, const unsigned char* buf, size_t len, bool to_stderr = false);
 void HexDumpW(std::wstring intro, const unsigned char* buf, size_t len, bool to_stderr = false);
 
+
+
+/*******************************************************************************
+ * FileExists() - returns true, if a file exists.
+ *   aFile     - filen name in utf8 (Note: 7bit ascii is valid utf8)
+ ******************************************************************************/
+bool FileExists(std::string aFile);
+bool FileExistsW(std::wstring aFile);
