@@ -89,3 +89,13 @@ void HexDumpW(std::wstring intro, const unsigned char* buf, size_t len, bool to_
      intro = L"(null)";
   HexDump(WStrToStr(intro), buf, len, to_stderr);
 }
+
+void HexDump(std::string intro, std::vector<unsigned char>& vec, bool to_stderr) {
+  HexDump(intro, vec.data(), vec.size(), to_stderr);
+}
+
+void HexDumpW(std::wstring intro, std::vector<unsigned char>& vec, bool to_stderr) {
+  if (intro.empty())
+     intro = L"(null)";
+  HexDump(WStrToStr(intro), vec.data(), vec.size(), to_stderr);
+}

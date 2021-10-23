@@ -4,6 +4,7 @@
  ******************************************************************************/
 #pragma once
 #include <string>  // std::string, size_t
+#include <vector>  // std::vector
 #include <cstdint> // std::intmax_t
 
 
@@ -62,12 +63,16 @@ void uSleep(size_t us);
 /*******************************************************************************
  * HexDump() - print bytes human readable.
  *   intro     - caption string in utf8 (Note: 7bit ascii is valid utf8)
- *   buf       - pointer to buffer 
+ *   buf       - pointer to buffer
  *   len       - length of buffer
  *   to_stderr - print to stderr, instead of stdout
+ *   vec       - reference to vector of unsigned char, instead of buf and len
  ******************************************************************************/
 void HexDump(std::string intro, const unsigned char* buf, size_t len, bool to_stderr = false);
 void HexDumpW(std::wstring intro, const unsigned char* buf, size_t len, bool to_stderr = false);
+
+void HexDump(std::string intro, std::vector<unsigned char>& vec, bool to_stderr = false);
+void HexDumpW(std::wstring intro, std::vector<unsigned char>& vec, bool to_stderr = false);
 
 
 
