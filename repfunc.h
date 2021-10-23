@@ -8,6 +8,16 @@
 
 
 /*******************************************************************************
+ * Convert strings to uppercase or lowercase.
+ ******************************************************************************/
+std::string LowerCase(std::string s);
+std::string UpperCase(std::string s);
+std::wstring LowerCase(std::wstring s);
+std::wstring UpperCase(std::wstring s);
+
+
+
+/*******************************************************************************
  * number conversion to std::string
  *   n         - number
  *   width     - minimum number of chars to print
