@@ -2,11 +2,25 @@
 # * librepfunc - a collection of common functions, classes and tools.
 # * See the README file for copyright information and how to reach the author.
 # ******************************************************************************/
-VERSION = 0.0.0
-LIBRARY = librepfunc-$(VERSION).so
 
 
 
+
+# reasonable versioning rules:
+#   - MAJOR++  -> API-incompatible
+#   - MINOR++  -> API-compatible, but new functionality
+#   - PATCH++  -> API untouched changes
+MAJOR = 0
+MINOR = 0
+PATCH = 0
+
+
+
+LIBRARY = librepfunc
+LIBRARY_MAJOR = $(LIBRARY).so.$(MAJOR)
+LIBRARY_MINOR = $(LIBRARY_MAJOR).$(MINOR)
+LIBRARY_PATCH = $(LIBRARY_MINOR).$(PATCH)
+VERSION = $(MAJOR).$(MINOR).$(PATCH)
 
 
 
@@ -28,7 +42,7 @@ DEFINES   =
 # * packages instead of fixing your broken distro, you may overwrite the
 # * package_name here.
 # *****************************************************************************/
-package_name ?= $(LIBRARY)
+package_name ?= $(LIBRARY_PATCH)
 
 
 #/******************************************************************************
@@ -53,6 +67,8 @@ INSTALL         ?= install
 INSTALL_PROGRAM ?= $(INSTALL) -m 755
 INSTALL_DATA    ?= $(INSTALL) -m 644
 LN              ?= ln
+LN_S            ?= $(LN) -s
+LN_SF           ?= $(LN) -sf
 MAKE            ?= make
 MKDIR           ?= mkdir
 MKDIR_P         ?= ${MKDIR} -p
@@ -107,27 +123,28 @@ endif
 
 all: $(OBJS)
 ifeq ($(CXX),@g++)
-	@echo -e "${GN} LINK $(LIBRARY)${RST}"
+	@echo -e "${GN} LINK $(LIBRARY_PATCH)${RST}"
 endif
-	$(CXX) $(CXXFLAGS) $(LDFLAGS) $(OBJS) $(LIBS) -o $(LIBRARY)
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) $(OBJS) $(LIBS) -o $(LIBRARY_PATCH)
+	$(LN_SF) $(LIBRARY_PATCH) $(LIBRARY).so
 
 .PHONY: clean Version.h
 clean:
-	@$(RM) -f $(OBJS) $(LIBRARY)
+	@$(RM) -f $(OBJS) $(LIBRARY_MAJOR) $(LIBRARY_MINOR) $(LIBRARY_PATCH)
 
-#install: all
-#	$(MKDIR_P) $(DESTDIR)$(bindir)
-#	$(MKDIR_P) $(DESTDIR)$(docdir)
-#	$(MKDIR_P) $(DESTDIR)$(man1dir)
-#	$(INSTALL_PROGRAM) $(BINARY) $(DESTDIR)$(bindir)
+install: all
+	$(MKDIR_P) $(DESTDIR)$(libdir)
+	$(MKDIR_P) $(DESTDIR)$(docdir)
+	$(MKDIR_P) $(DESTDIR)$(man1dir)
+	$(INSTALL_PROGRAM) $(LIBRARY) $(DESTDIR)$(libdir)
 #	$(INSTALL_DATA) COPYING HISTORY README $(DESTDIR)$(docdir)
 #	$(INSTALL_DATA) doc/w_scan_cpp.1 $(DESTDIR)$(man1dir)
-#
-#uninstall:
-#	$(RM) -f $(DESTDIR)$(bindir)/$(BINARY)
+
+uninstall:
+	$(RM) -f $(DESTDIR)$(libdir)/$(BINARY)
 #	$(RM) -rf $(DESTDIR)$(docdir)
 #	$(RM) -f $(DESTDIR)$(man1dir)/w_scan_cpp.1
-#
+
 
 
 
