@@ -32,6 +32,16 @@ std::wstring TrimW(std::wstring s);
 
 
 /*******************************************************************************
+ * Fill up a string with spaces to be at least n chars; the opposite of Trim.
+ ******************************************************************************/
+std::string FrontFill(std::string s, size_t n);
+std::string BackFill(std::string s, size_t n);
+std::wstring FrontFillW(std::wstring s, size_t n);
+std::wstring BackFillW(std::wstring s, size_t n);
+
+
+
+/*******************************************************************************
  * number conversion to std::string
  *   n         - number
  *   width     - minimum number of chars to print
