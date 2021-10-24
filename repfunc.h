@@ -42,6 +42,17 @@ std::wstring BackFillW(std::wstring s, size_t n);
 
 
 /*******************************************************************************
+ * splits a string on a delimiter char, and returns a vector of strings
+ * from it.
+ *   s         - string to split
+ *   delim     - the delimiting char
+ ******************************************************************************/
+std::vector<std::string> SplitStr(const std::string s, const char delim);
+std::vector<std::wstring> SplitStrW(const std::wstring s, const wchar_t delim);
+
+
+
+/*******************************************************************************
  * number conversion to std::string
  *   n         - number
  *   width     - minimum number of chars to print
