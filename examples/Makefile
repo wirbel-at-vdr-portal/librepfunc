@@ -107,6 +107,7 @@ all: librepfunc.so
 	$(CXX) $(CXXFLAGS) $(DEFINES) $(INCLUDES) Sleep.cpp      -o Sleep_example      $(LDFLAGS) $(LIBS)
 	$(CXX) $(CXXFLAGS) $(DEFINES) $(INCLUDES) FileExists.cpp -o FileExists_example $(LDFLAGS) $(LIBS)
 	$(CXX) $(CXXFLAGS) $(DEFINES) $(INCLUDES) UpperCase.cpp  -o UpperCase_example  $(LDFLAGS) $(LIBS)
+	$(CXX) $(CXXFLAGS) $(DEFINES) $(INCLUDES) Trim.cpp       -o Trim_example       $(LDFLAGS) $(LIBS)
 
 librepfunc.so:
 	$(LN_SF) ../librepfunc.so librepfunc.so

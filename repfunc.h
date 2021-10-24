@@ -19,6 +19,19 @@ std::wstring UpperCase(std::wstring s);
 
 
 /*******************************************************************************
+ * Trim strings, left, right, or, both ends.
+ * For details on trimmed chars, pls refer to std::isspace() from <cctype>
+ ******************************************************************************/
+std::string LeftTrim(std::string s);
+std::string RightTrim(std::string s);
+std::string Trim(std::string s);
+std::wstring LeftTrimW(std::wstring s);
+std::wstring RightTrimW(std::wstring s);
+std::wstring TrimW(std::wstring s);
+
+
+
+/*******************************************************************************
  * number conversion to std::string
  *   n         - number
  *   width     - minimum number of chars to print
