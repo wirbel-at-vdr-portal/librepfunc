@@ -7,6 +7,7 @@
 #include <exception> // std::exception
 #define __STDC_LIMIT_MACROS
 #include <cmath>     // INTMAX_MAX
+#include <repfunc.h>
 
 template<class T>
 std::intmax_t StrToIntT(const std::basic_string<T>& s, size_t* pos, size_t base, const char* f) {
