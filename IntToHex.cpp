@@ -10,7 +10,7 @@
 template<class T>
 std::basic_string<T> HexT(std::intmax_t n, size_t width) {
   std::basic_stringstream<T> ss;
-  ss << std::uppercase << std::setfill((T)'0') << std::setw(width) << n;
+  ss << std::uppercase << std::setfill((T)'0') << std::setw(width) << std::hex << n;
   return ss.str();
 }
 
