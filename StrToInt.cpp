@@ -43,6 +43,6 @@ std::intmax_t StrToInt(const std::string& s, size_t* pos, size_t base) {
   return StrToIntT(s, pos, base, __PRETTY_FUNCTION__);
 }
 
-std::intmax_t StrToInt(const std::wstring& s, size_t* pos, size_t base) {
+std::intmax_t WStrToInt(const std::wstring& s, size_t* pos, size_t base) {
   return StrToIntT(s, pos, base, __PRETTY_FUNCTION__);
 }
