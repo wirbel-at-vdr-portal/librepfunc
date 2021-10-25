@@ -2,9 +2,9 @@
  * librepfunc - a collection of common functions, classes and tools.
  * See the README file for copyright information and how to reach the author.
  ******************************************************************************/
-#include <repfunc.h>
 #include <sstream>   // std::stringstream
 #include <iomanip>   // std::setfill, std::setw, std::left, std::right
+#include <repfunc.h>
 
 
 template<class T>
