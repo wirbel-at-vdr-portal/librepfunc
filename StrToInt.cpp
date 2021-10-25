@@ -9,7 +9,7 @@
 #include <cmath>     // INTMAX_MAX
 
 template<class T>
-std::intmax_t StrToIntT(const std::base_string<T>& s, size_t* pos, size_t base, const char* f) {
+std::intmax_t StrToIntT(const std::basic_string<T>& s, size_t* pos, size_t base, const char* f) {
   constexpr std::intmax_t err = INTMAX_MAX; /* greater or equal 2^63 - 1 */
 
   if (s.empty()) {
