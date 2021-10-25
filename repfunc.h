@@ -83,6 +83,32 @@ std::wstring FloatToStrW(double n, size_t width, size_t precision, bool left);
 
 
 /*******************************************************************************
+ * std::string conversion to number. Prints to cerr on conversion failure.
+ *   s         - string
+ *   pos       - address of an size_t to store the number of chars processed,
+ *               or nullptr
+ *   base      - the number base
+ * return value: converted number, or,
+ *               if conversion fails INTMAX_MAX for int, NAN for double.
+ ******************************************************************************/
+std::intmax_t StrToInt(const std::string& s, size_t* pos = nullptr, size_t base = 0);
+
+
+
+/*******************************************************************************
+ * std::wstring conversion to number. Prints to cerr on conversion failure.
+ *   s         - string
+ *   pos       - address of an size_t to store the number of chars processed,
+ *               or nullptr
+ *   base      - the number base
+ * return value: converted number, or,
+ *               if conversion fails INTMAX_MAX for int, NAN for double.
+ ******************************************************************************/
+std::intmax_t WStrToInt(const std::wstring& s, size_t* pos = nullptr, size_t base = 0);
+
+
+
+/*******************************************************************************
  * sleep a thread using STL
  *   s         - seconds
  *   ms        - milliseconds
