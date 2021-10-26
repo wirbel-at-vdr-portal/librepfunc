@@ -93,7 +93,7 @@ std::wstring FloatToStrW(double n, size_t width, size_t precision, bool left);
  *               Hint: use std::isnan() from <cmath> for NAN check.
  ******************************************************************************/
 std::intmax_t StrToInt  (const std::string& s, size_t* pos = nullptr, size_t base = 0);
-double        StrToFloat(const std::string& s, size_t* pos);
+double        StrToFloat(const std::string& s, size_t* pos = nullptr);
 
 
 
@@ -108,7 +108,7 @@ double        StrToFloat(const std::string& s, size_t* pos);
  *               Hint: use std::isnan() from <cmath> for NAN check.
  ******************************************************************************/
 std::intmax_t WStrToInt  (const std::wstring& s, size_t* pos = nullptr, size_t base = 0);
-double        WStrToFloat(const std::wstring& s, size_t* pos);
+double        WStrToFloat(const std::wstring& s, size_t* pos = nullptr);
 
 
 
