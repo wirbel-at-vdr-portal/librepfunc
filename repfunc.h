@@ -150,6 +150,22 @@ bool FileExistsW(std::wstring aFile);
 
 
 /*******************************************************************************
+ * class cFileList - a list of files and subdirs of a directory.
+ *   aDirectory - the directory to list.
+ *   Filter     - partial name (case sensitive) of the files or
+ *                directories to list. Empty for all files/dirs.
+ ******************************************************************************/
+class cFileList {
+private:
+  std::vector<std::string> priv;
+public:
+  cFileList(std::string aDirectory, std::string Filter = "");
+  std::vector<std::string> List(void);
+};
+
+
+
+/*******************************************************************************
  * Convert between UTF8 <-> UCS2 / UTF-32
  ******************************************************************************/
 std::string  WStrToStr(std::wstring ws);

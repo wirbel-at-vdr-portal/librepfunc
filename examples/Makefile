@@ -112,6 +112,7 @@ all: librepfunc.so
 	$(CXX) $(CXXFLAGS) $(DEFINES) $(INCLUDES) SplitStr.cpp   -o SplitStr_example   $(LDFLAGS) $(LIBS)
 	$(CXX) $(CXXFLAGS) $(DEFINES) $(INCLUDES) StrToInt.cpp   -o StrToInt_example   $(LDFLAGS) $(LIBS)
 	$(CXX) $(CXXFLAGS) $(DEFINES) $(INCLUDES) StrToFloat.cpp -o StrToFloat_example $(LDFLAGS) $(LIBS)
+	$(CXX) $(CXXFLAGS) $(DEFINES) $(INCLUDES) FileList.cpp   -o FileList_example   $(LDFLAGS) $(LIBS)
 
 librepfunc.so:
 	$(LN_SF) ../librepfunc.so librepfunc.so
