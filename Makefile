@@ -134,9 +134,11 @@ clean:
 
 install: all
 	$(MKDIR_P) $(DESTDIR)$(libdir)
+	$(MKDIR_P) $(DESTDIR)$(includedir)
 	$(MKDIR_P) $(DESTDIR)$(docdir)
 	$(MKDIR_P) $(DESTDIR)$(man1dir)
 	$(INSTALL_PROGRAM) $(LIBRARY_PATCH) $(DESTDIR)$(libdir)
+	$(INSTALL_DATA) repfunc.h $(DESTDIR)$(includedir)
 	$(LN_SF) $(DESTDIR)$(libdir)/$(LIBRARY_PATCH) $(DESTDIR)$(libdir)/$(LIBRARY_MINOR)
 	$(LN_SF) $(DESTDIR)$(libdir)/$(LIBRARY_MINOR) $(DESTDIR)$(libdir)/$(LIBRARY_MAJOR)
 	$(LN_SF) $(DESTDIR)$(libdir)/$(LIBRARY_MAJOR) $(DESTDIR)$(libdir)/$(LIBRARY)
@@ -150,6 +152,7 @@ uninstall:
 	$(RM) -f $(DESTDIR)$(libdir)/$(LIBRARY_MINOR)
 	$(RM) -f $(DESTDIR)$(libdir)/$(LIBRARY_MAJOR)
 	$(RM) -f $(DESTDIR)$(libdir)/$(LIBRARY)
+	$(RM) -f $(DESTDIR)$(includedir)/repfunc.h
 	$(RM) -f $(DESTDIR)$(docdir)/COPYING
 	$(RM) -f $(DESTDIR)$(docdir)/README
 	$(RM) -rf $(DESTDIR)$(docdir)
