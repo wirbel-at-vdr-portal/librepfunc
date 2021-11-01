@@ -287,7 +287,6 @@ double StrToFloat(const std::string& s, size_t* pos) {
 }
 
 double WStrToFloat(const std::wstring& ws, size_t* pos) {
-  std::string s(ws.size(), ' ');
-  for(size_t i=0;i<ws.size();i++) s[i] = (char)ws[i];
+  std::string s = WStrToStr(ws);
   return StrToFloat(s, pos);
 }
