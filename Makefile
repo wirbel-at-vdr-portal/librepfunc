@@ -16,8 +16,8 @@ PATCH = 0
 
 
 
-LIBRARY = librepfunc
-LIBRARY_MAJOR = $(LIBRARY).so.$(MAJOR)
+LIBRARY = librepfunc.so
+LIBRARY_MAJOR = $(LIBRARY).$(MAJOR)
 LIBRARY_MINOR = $(LIBRARY_MAJOR).$(MINOR)
 LIBRARY_PATCH = $(LIBRARY_MINOR).$(PATCH)
 VERSION = $(MAJOR).$(MINOR).$(PATCH)
@@ -86,7 +86,7 @@ WGET            ?= wget
 # *****************************************************************************/
 srcdir           = $(shell pwd)
 tmpdir          ?= /tmp
-prefix          ?= /usr/local
+prefix          ?= /usr
 sysconfdir       = $(prefix)/etc
 includedir       = $(prefix)/include
 sharedstatedir   = $(prefix)/com
@@ -126,7 +126,7 @@ ifeq ($(CXX),@g++)
 	@echo -e "${GN} LINK $(LIBRARY_PATCH)${RST}"
 endif
 	$(CXX) $(CXXFLAGS) $(LDFLAGS) $(OBJS) $(LIBS) -o $(LIBRARY_PATCH)
-	$(LN_SF) $(LIBRARY_PATCH) $(LIBRARY).so
+	$(LN_SF) $(LIBRARY_PATCH) $(LIBRARY)
 
 .PHONY: clean Version.h
 clean:
@@ -136,14 +136,26 @@ install: all
 	$(MKDIR_P) $(DESTDIR)$(libdir)
 	$(MKDIR_P) $(DESTDIR)$(docdir)
 	$(MKDIR_P) $(DESTDIR)$(man1dir)
-	$(INSTALL_PROGRAM) $(LIBRARY) $(DESTDIR)$(libdir)
-#	$(INSTALL_DATA) COPYING HISTORY README $(DESTDIR)$(docdir)
-#	$(INSTALL_DATA) doc/w_scan_cpp.1 $(DESTDIR)$(man1dir)
+	$(INSTALL_PROGRAM) $(LIBRARY_PATCH) $(DESTDIR)$(libdir)
+	$(LN_SF) $(DESTDIR)$(libdir)/$(LIBRARY_PATCH) $(DESTDIR)$(libdir)/$(LIBRARY_MINOR)
+	$(LN_SF) $(DESTDIR)$(libdir)/$(LIBRARY_MINOR) $(DESTDIR)$(libdir)/$(LIBRARY_MAJOR)
+	$(LN_SF) $(DESTDIR)$(libdir)/$(LIBRARY_MAJOR) $(DESTDIR)$(libdir)/$(LIBRARY)
+	$(INSTALL_DATA) COPYING README $(DESTDIR)$(docdir)
+
+
+#	$(INSTALL_DATA) doc/librepfunc.1 $(DESTDIR)$(man1dir)
 
 uninstall:
-	$(RM) -f $(DESTDIR)$(libdir)/$(BINARY)
-#	$(RM) -rf $(DESTDIR)$(docdir)
-#	$(RM) -f $(DESTDIR)$(man1dir)/w_scan_cpp.1
+	$(RM) -f $(DESTDIR)$(libdir)/$(LIBRARY_PATCH)
+	$(RM) -f $(DESTDIR)$(libdir)/$(LIBRARY_MINOR)
+	$(RM) -f $(DESTDIR)$(libdir)/$(LIBRARY_MAJOR)
+	$(RM) -f $(DESTDIR)$(libdir)/$(LIBRARY)
+	$(RM) -f $(DESTDIR)$(docdir)/COPYING
+	$(RM) -f $(DESTDIR)$(docdir)/README
+	$(RM) -rf $(DESTDIR)$(docdir)
+	$(RM) -f $(DESTDIR)$(man1dir)/librepfunc.1
+
+
 
 
 
