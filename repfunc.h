@@ -166,6 +166,23 @@ public:
 
 
 /*******************************************************************************
+ * Read from or write to files.
+ *   aFileName  - file to read or write.
+ *   ss         - a stringstream to write into a file
+ *   lines      - a vector of strings to write into a file
+ *   return value
+ *              Read* : a stringstream or vector of strings from the file.
+ *              Write*: true on success.
+ ******************************************************************************/
+std::stringstream        ReadFileToStream(std::string aFileName);
+std::vector<std::string> ReadFile(std::string aFileName);
+
+bool WriteStreamToFile(std::string aFileName, std::stringstream& ss);
+bool WriteFile(std::string aFileName, std::vector<std::string>& lines);
+
+
+
+/*******************************************************************************
  * Convert between UTF8 <-> UCS2 / UTF-32
  ******************************************************************************/
 std::string  WStrToStr(std::wstring ws);
