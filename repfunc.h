@@ -113,6 +113,14 @@ double        WStrToFloat(const std::wstring& s, size_t* pos = nullptr);
 
 
 /*******************************************************************************
+ * returns a local time string 'dd.mm.yyyy HH:MM:SS' (German locale).
+ * If t is given, it's read as a time_t.
+ ******************************************************************************/
+std::string TimeStr(std::intmax_t t = 0);
+
+
+
+/*******************************************************************************
  * sleep a thread using STL
  *   s         - seconds
  *   ms        - milliseconds
