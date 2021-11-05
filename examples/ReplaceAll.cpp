@@ -7,7 +7,7 @@
 
 int main() {
   std::string s("abc def ghi abc def ghi");
-  ReplaceAll(s,"abc", "xyz");
+  ReplaceAll(s, "abc", "xyz");
   std::cout << "s = " << s << std::endl;
 
   return 0;
