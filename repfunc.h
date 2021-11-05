@@ -53,6 +53,13 @@ std::vector<std::wstring> SplitStrW(const std::wstring s, const wchar_t delim);
 
 
 /*******************************************************************************
+ * replace all occurencies if 'from' by 'to'.
+ ******************************************************************************/
+void ReplaceAll(std::string& s, const std::string& from, const std::string& to);
+
+
+
+/*******************************************************************************
  * number conversion to std::string
  *   n         - number
  *   width     - minimum number of chars to print
