@@ -6,6 +6,9 @@
 #include <string>  // std::string, size_t
 #include <vector>  // std::vector
 #include <cstdint> // std::intmax_t
+#include <thread>  // std::thread
+#include <future>  // std::future, std::promise
+
 
 
 /*******************************************************************************
@@ -202,3 +205,30 @@ bool WriteFile(std::string aFileName, std::vector<std::string>& lines);
  ******************************************************************************/
 std::string  WStrToStr(std::wstring ws);
 std::wstring StrToWStr(std::string s);
+
+
+
+/*******************************************************************************
+ * ThreadBase, a base class to control a child process.
+ ******************************************************************************/
+class ThreadBase {
+private:
+  std::promise<void> pObj;
+  std::future<void>  fObj;
+  std::thread tObj;
+protected:
+  /* A derived class needs to implement Action() to do it's task,
+   * while periodically check Running() == true, ie in a loop.
+   */
+  virtual void Action(void) = 0;
+  bool Running(void); // true, if job may continue.
+public:
+  ThreadBase();
+  ThreadBase(ThreadBase&& other);
+  virtual ~ThreadBase();
+  ThreadBase& operator=(ThreadBase&& other);
+
+  bool Start(void);  // Start the job
+  void Cancel(void); // Stop the job
+  void Join(void);   // Wait until job finished.
+};

@@ -112,7 +112,7 @@ SOURCES  := $(wildcard $(srcdir)/*.cpp)
 OBJS      = $(SOURCES:.cpp=.o)
 LIBS      =
 INCLUDES  = -I$(srcdir)
-LDFLAGS   = -shared
+LDFLAGS   = -shared -lpthread
 
 
 %.o: %.cpp
