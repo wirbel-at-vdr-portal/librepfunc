@@ -13,14 +13,17 @@
 
 
 
+
+
+
 #/******************************************************************************
 # * if you prefer verbose non-coloured build messages, remove the '@' here:
 # *****************************************************************************/
-CXX = g++
+CXX = @g++
 CXXFLAGS  = -g -O3 -fPIC -Wall -Wextra -Werror=overloaded-virtual -Wfatal-errors
 DEFINES   =
-
-
+CPPFILES  := $(wildcard *.cpp)
+EXAMPLES  = $(CPPFILES:.cpp=_example)
 
 #/******************************************************************************
 # * color definitions, RST=reset, CY=cyan, MG=magenta, BL=blue, (..)
@@ -99,29 +102,16 @@ ifeq ($(CXX),@g++)
 endif
 	$(CXX) $(CXXFLAGS) -c $(DEFINES) $(INCLUDES) -o $@ $<
 
-all: librepfunc.so
-	$(CXX) $(CXXFLAGS) $(DEFINES) $(INCLUDES) FloatToStr.cpp -o FloatToStr_example $(LDFLAGS) $(LIBS)
-	$(CXX) $(CXXFLAGS) $(DEFINES) $(INCLUDES) IntToStr.cpp   -o IntToStr_example   $(LDFLAGS) $(LIBS)
-	$(CXX) $(CXXFLAGS) $(DEFINES) $(INCLUDES) IntToHex.cpp   -o IntToHex_example   $(LDFLAGS) $(LIBS)
-	$(CXX) $(CXXFLAGS) $(DEFINES) $(INCLUDES) HexDump.cpp    -o HexDump_example    $(LDFLAGS) $(LIBS)
-	$(CXX) $(CXXFLAGS) $(DEFINES) $(INCLUDES) Sleep.cpp      -o Sleep_example      $(LDFLAGS) $(LIBS)
-	$(CXX) $(CXXFLAGS) $(DEFINES) $(INCLUDES) FileExists.cpp -o FileExists_example $(LDFLAGS) $(LIBS)
-	$(CXX) $(CXXFLAGS) $(DEFINES) $(INCLUDES) UpperCase.cpp  -o UpperCase_example  $(LDFLAGS) $(LIBS)
-	$(CXX) $(CXXFLAGS) $(DEFINES) $(INCLUDES) Trim.cpp       -o Trim_example       $(LDFLAGS) $(LIBS)
-	$(CXX) $(CXXFLAGS) $(DEFINES) $(INCLUDES) FrontFill.cpp  -o FrontFill_example  $(LDFLAGS) $(LIBS)
-	$(CXX) $(CXXFLAGS) $(DEFINES) $(INCLUDES) SplitStr.cpp   -o SplitStr_example   $(LDFLAGS) $(LIBS)
-	$(CXX) $(CXXFLAGS) $(DEFINES) $(INCLUDES) StrToInt.cpp   -o StrToInt_example   $(LDFLAGS) $(LIBS)
-	$(CXX) $(CXXFLAGS) $(DEFINES) $(INCLUDES) StrToFloat.cpp -o StrToFloat_example $(LDFLAGS) $(LIBS)
-	$(CXX) $(CXXFLAGS) $(DEFINES) $(INCLUDES) FileList.cpp   -o FileList_example   $(LDFLAGS) $(LIBS)
-	$(CXX) $(CXXFLAGS) $(DEFINES) $(INCLUDES) ReadWriteFile.cpp -o ReadWriteFile_example   $(LDFLAGS) $(LIBS)
-	$(CXX) $(CXXFLAGS) $(DEFINES) $(INCLUDES) TimeStr.cpp    -o TimeStr_example    $(LDFLAGS) $(LIBS)
-	$(CXX) $(CXXFLAGS) $(DEFINES) $(INCLUDES) ReplaceAll.cpp -o ReplaceAll_example $(LDFLAGS) $(LIBS)
+%_example:
+ifeq ($(CXX),@g++)
+	@echo -e "${BL} CXX $@${RST}"
+endif
+	$(CXX) $(CXXFLAGS) $(DEFINES) $(INCLUDES) $(subst _example,.cpp,$@) -o $@ $(LDFLAGS) $(LIBS)
 
+all: librepfunc.so $(EXAMPLES)
 
 librepfunc.so:
 	$(LN_SF) ../librepfunc.so librepfunc.so
-
-
 
 
 .PHONY: clean Version.h
