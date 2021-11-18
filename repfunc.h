@@ -68,9 +68,11 @@ void ReplaceAll(std::string& s, const std::string& from, const std::string& to);
  *   width     - minimum number of chars to print
  *   left      - left or right text padding
  *   precision - number of digits after period
+ *   fill      - char to use for fill
  ******************************************************************************/
 std::string IntToStr(std::intmax_t n);
 std::string IntToStr(std::intmax_t n, size_t width, bool left);
+std::string IntToStr(std::intmax_t n, size_t width, bool left, char fill);
 std::string IntToHex(std::intmax_t n, size_t width);
 std::string FloatToStr(double n);
 std::string FloatToStr(double n, size_t width, size_t precision, bool left);
@@ -83,9 +85,11 @@ std::string FloatToStr(double n, size_t width, size_t precision, bool left);
  *   width     - minimum number of chars to print
  *   left      - left or right text padding
  *   precision - number of digits after period
+ *   fill      - char to use for fill
  ******************************************************************************/
 std::wstring IntToStrW(std::intmax_t n);
 std::wstring IntToStrW(std::intmax_t n, size_t width, bool left);
+std::wstring IntToStrW(std::intmax_t n, size_t width, bool left, wchar_t fill);
 std::wstring IntToHexW(std::intmax_t n, size_t width);
 std::wstring FloatToStrW(double n);
 std::wstring FloatToStrW(double n, size_t width, size_t precision, bool left);

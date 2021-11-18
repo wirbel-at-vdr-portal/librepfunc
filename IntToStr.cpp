@@ -31,6 +31,9 @@ std::string IntToStr(std::intmax_t n, size_t width, bool left) {
   return IntToStrT<char>(n, width, ' ', left);
 }
 
+std::string IntToStr(std::intmax_t n, size_t width, bool left, char fill) {
+  return IntToStrT<char>(n, width, fill, left);
+}
 
 std::wstring IntToStrW(std::intmax_t n) {
   return IntToStrT<wchar_t>(n, 0, (wchar_t)' ', true);
@@ -39,4 +42,9 @@ std::wstring IntToStrW(std::intmax_t n) {
 
 std::wstring IntToStrW(std::intmax_t n, size_t width, bool left) {
   return IntToStrT<wchar_t>(n, width, (wchar_t)' ', left);
+}
+
+
+std::wstring IntToStrW(std::intmax_t n, size_t width, bool left, wchar_t fill) {
+  return IntToStrT<wchar_t>(n, width, fill, left);
 }
