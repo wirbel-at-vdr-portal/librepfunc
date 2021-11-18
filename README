@@ -31,6 +31,7 @@ vector of string related:
 number conversion to string or vice versa
  * IntToStr
  * FloatToStr
+ * ExpToStr
  * StrToInt
  + StrToFloat
 
@@ -58,6 +59,15 @@ start/stop threads from main thread
  * ThreadBase
 
 (..)
+
+
+
+Installation:
+   make -j8
+   sudo make install
+
+Deinstallation of the files this package installed:
+   sudo make uninstall
 
 
 

@@ -19,6 +19,7 @@ int main() {
   std::cout << "FloatToStr(d, 8, 2, true)  = '" << FloatToStr(d, 8, 2, true)  << "'" << std::endl;
   std::cout << "FloatToStr(d, 8, 2, false) = '" << FloatToStr(d, 8, 2, false) << "'" << std::endl;
   std::cout << "FloatToStr(d, 0, 10, true) = '" << FloatToStr(d, 0, 10, true) << "'" << std::endl;
+  std::cout << "ExpToStr(d, 2)             = '" << ExpToStr(d, 2)             << "'" << std::endl;
 
   return 0;
 }
