@@ -15,5 +15,51 @@ See the file COPYING for more information.
 
 
 
+
+This is a collection is utilities and functions, which i personally use in my
+projects, shifting them into a lib helps me not reinvent the wheel every time.
+
+string related:
+* LowerCase and UpperCase
+* LeftTrim and RightTrim and Trim
+* FrontFill and BackFill
+* ReplaceAll
+
+vector of string related:
+* SplitStr
+
+number conversion to string or vice versa
+ * IntToStr
+ * FloatToStr
+ * StrToInt
+ + StrToFloat
+
+print time
+ * TimeStr
+
+other conversions
+ * BCDtoDecimal
+
+sleep threads
+ * Sleep, mSleep, uSleep
+
+print hex data
+ * HexDump
+
+files and directories
+ * FileExists
+ * cFileList
+ * ReadFileToStream
+ * ReadFile
+ * WriteStreamToFile
+ * WriteFile
+
+start/stop threads from main thread
+ * ThreadBase
+
+(..)
+
+
+
 have phun,
 Winfried
