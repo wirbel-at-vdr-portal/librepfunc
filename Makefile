@@ -10,7 +10,7 @@
 #   - MAJOR++  -> API-incompatible
 #   - MINOR++  -> API-compatible, but new functionality
 #   - PATCH++  -> API untouched changes
-MAJOR = 0
+MAJOR = 1
 MINOR = 0
 PATCH = 0
 
