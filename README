@@ -13,9 +13,13 @@ it under the terms of the GNU General Public License version 2 as
 published by the Free Software Foundation.
 See the file COPYING for more information.
 
+--------------------------------------------------------------------------------
 
 
 
+--------------------------------------------------------------------------------
+- About this library                                                           -
+--------------------------------------------------------------------------------
 This is a collection is utilities and functions, which i personally use in my
 projects, shifting them into a lib helps me not reinvent the wheel every time.
 
@@ -61,13 +65,57 @@ start/stop threads from main thread
 (..)
 
 
+--------------------------------------------------------------------------------
+- About Library Versioning                                                     -
+--------------------------------------------------------------------------------
+This library uses a three number version numbering, following to what i under-
+stand as "reasonable versioning rules".
+The rule of thumb is here:
 
+    version = MAJOR.MINOR.PATCH
+
+example: 1.0.0
+
+
+MAJOR increased -> an API-incompatible change was introduced. Installing the lib
+                   may break installed packages using the old lib.
+
+MINOR increased -> an API-compatible, new functionality was added. It's safe to
+                   replace any older version of this lib with a newer one.
+
+PATCH increased -> the API is untouched. An inprovement or bug fix was done. It
+                   is recommended to replace older libs with same MAJOR.MINOR.
+
+--------------------------------------------------------------------------------
+- Library Compat                                                               -
+--------------------------------------------------------------------------------
+  - 1.0.0 first version, for VDR wirbelscan-Plugin 2021.10.xx, LFS parser,
+          Sat Table Generator for wirbelscan.
+
+  - 1.1.0 adds ExpToStr() for w_scan_cpp > 20211009, which in turn uses the
+          VDR wirbelscan-Plugin above.
+
+
+--------------------------------------------------------------------------------
+- Library Compat                                                               -
+--------------------------------------------------------------------------------
 Installation:
    make -j8
    sudo make install
 
-Deinstallation of the files this package installed:
+If you - by mistake - installed this lib and may want to completely remove it
+from your system:
    sudo make uninstall
+
+NOTE: this will remove exactly the files and links this package installed,
+      not those from newer or older versions.
+      However, this may break links overwritten by 'make install' of any other
+      version of this lib.
+
+
+Library update:
+  Find the very last installed source of this lib and execute 'make uninstall'.
+  Continue with Installation Process of the newer lib.
 
 
 
