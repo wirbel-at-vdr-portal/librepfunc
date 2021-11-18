@@ -131,6 +131,13 @@ std::string TimeStr(std::intmax_t t = 0);
 
 
 /*******************************************************************************
+ * conversion from 4-bit BCD value to decimal value, ie 0x0192 -> 192
+ ******************************************************************************/
+std::intmax_t BCDtoDecimal(std::intmax_t bcd);
+
+
+
+/*******************************************************************************
  * sleep a thread using STL
  *   s         - seconds
  *   ms        - milliseconds
