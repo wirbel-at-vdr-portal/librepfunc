@@ -21,7 +21,7 @@ LIBRARY_MAJOR = $(LIBRARY).$(MAJOR)
 LIBRARY_MINOR = $(LIBRARY_MAJOR).$(MINOR)
 LIBRARY_PATCH = $(LIBRARY_MINOR).$(PATCH)
 VERSION = $(MAJOR).$(MINOR).$(PATCH)
-
+URL = https://github.com/wirbel-at-vdr-portal/librepfunc
 
 
 
@@ -107,6 +107,7 @@ man2dir          = $(mandir)/man2
 man3dir          = $(mandir)/man3
 man4dir          = $(mandir)/man4
 man5dir          = $(mandir)/man5
+pkgconfigdir     = /usr/lib/pkgconfig
 
 SOURCES  := $(wildcard $(srcdir)/*.cpp)
 OBJS      = $(SOURCES:.cpp=.o)
@@ -114,6 +115,19 @@ LIBS      =
 INCLUDES  = -I$(srcdir)
 LDFLAGS   = -shared -lpthread
 
+define PKG_DATA
+prefix=$(prefix)
+exec_prefix=$${prefix}
+includedir=$${prefix}/include
+libdir=$${exec_prefix}/lib
+
+Name: librepfunc
+Description: tools library for w_scan_cpp and wirbelscan
+URL: $(URL)
+Version: $(VERSION)
+Libs: -L$${libdir} -lrepfunc
+Cflags: -I$${includedir}
+endef
 
 %.o: %.cpp
 ifeq ($(CXX),@g++)
@@ -130,20 +144,22 @@ endif
 
 .PHONY: clean Version.h
 clean:
-	@$(RM) -f $(OBJS) $(LIBRARY_MAJOR) $(LIBRARY_MINOR) $(LIBRARY_PATCH)
+	@$(RM) -f $(OBJS) $(LIBRARY) $(LIBRARY_MAJOR) $(LIBRARY_MINOR) $(LIBRARY_PATCH) librepfunc.pc
 
 install: all
+	$(file >librepfunc.pc,$(PKG_DATA))
 	$(MKDIR_P) $(DESTDIR)$(libdir)
 	$(MKDIR_P) $(DESTDIR)$(includedir)
 	$(MKDIR_P) $(DESTDIR)$(docdir)
 	$(MKDIR_P) $(DESTDIR)$(man1dir)
+	$(MKDIR_P) $(DESTDIR)$(pkgconfigdir)
 	$(INSTALL_PROGRAM) $(LIBRARY_PATCH) $(DESTDIR)$(libdir)
 	$(INSTALL_DATA) repfunc.h $(DESTDIR)$(includedir)
 	$(LN_SF) $(DESTDIR)$(libdir)/$(LIBRARY_PATCH) $(DESTDIR)$(libdir)/$(LIBRARY_MINOR)
 	$(LN_SF) $(DESTDIR)$(libdir)/$(LIBRARY_MINOR) $(DESTDIR)$(libdir)/$(LIBRARY_MAJOR)
 	$(LN_SF) $(DESTDIR)$(libdir)/$(LIBRARY_MAJOR) $(DESTDIR)$(libdir)/$(LIBRARY)
 	$(INSTALL_DATA) COPYING README $(DESTDIR)$(docdir)
-
+	$(INSTALL_DATA) librepfunc.pc $(DESTDIR)$(pkgconfigdir)
 
 #	$(INSTALL_DATA) doc/librepfunc.1 $(DESTDIR)$(man1dir)
 
@@ -157,9 +173,7 @@ uninstall:
 	$(RM) -f $(DESTDIR)$(docdir)/README
 	$(RM) -rf $(DESTDIR)$(docdir)
 	$(RM) -f $(DESTDIR)$(man1dir)/librepfunc.1
-
-
-
+	$(RM) -f $(DESTDIR)$(pkgconfigdir)/librepfunc.pc
 
 
 

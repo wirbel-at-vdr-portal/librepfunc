@@ -50,3 +50,4 @@ tests
 *.m3u
 README.md
 Thumbs.db
+librepfunc.pc
