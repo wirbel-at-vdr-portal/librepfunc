@@ -69,6 +69,7 @@ INSTALL_DATA    ?= $(INSTALL) -m 644
 LN              ?= ln
 LN_S            ?= $(LN) -s
 LN_SF           ?= $(LN) -sf
+LN_SFR          ?= $(LN) -sfr
 MAKE            ?= make
 MKDIR           ?= mkdir
 MKDIR_P         ?= ${MKDIR} -p
@@ -155,9 +156,9 @@ install: all
 	$(MKDIR_P) $(DESTDIR)$(pkgconfigdir)
 	$(INSTALL_PROGRAM) $(LIBRARY_PATCH) $(DESTDIR)$(libdir)
 	$(INSTALL_DATA) repfunc.h $(DESTDIR)$(includedir)
-	$(LN_SF) $(DESTDIR)$(libdir)/$(LIBRARY_PATCH) $(DESTDIR)$(libdir)/$(LIBRARY_MINOR)
-	$(LN_SF) $(DESTDIR)$(libdir)/$(LIBRARY_MINOR) $(DESTDIR)$(libdir)/$(LIBRARY_MAJOR)
-	$(LN_SF) $(DESTDIR)$(libdir)/$(LIBRARY_MAJOR) $(DESTDIR)$(libdir)/$(LIBRARY)
+	$(LN_SFR) $(DESTDIR)$(libdir)/$(LIBRARY_PATCH) $(DESTDIR)$(libdir)/$(LIBRARY_MINOR)
+	$(LN_SFR) $(DESTDIR)$(libdir)/$(LIBRARY_MINOR) $(DESTDIR)$(libdir)/$(LIBRARY_MAJOR)
+	$(LN_SFR) $(DESTDIR)$(libdir)/$(LIBRARY_MAJOR) $(DESTDIR)$(libdir)/$(LIBRARY)
 	$(INSTALL_DATA) COPYING README $(DESTDIR)$(docdir)
 	$(INSTALL_DATA) librepfunc.pc $(DESTDIR)$(pkgconfigdir)
 
