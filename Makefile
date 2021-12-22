@@ -12,7 +12,7 @@
 #   - PATCH++  -> API untouched changes
 MAJOR = 1
 MINOR = 1
-PATCH = 1
+PATCH = 2
 
 
 
@@ -33,7 +33,7 @@ URL = https://github.com/wirbel-at-vdr-portal/librepfunc
 # *****************************************************************************/
 CXX = @g++
 CXXFLAGS  = -g -O3 -fPIC -Wall -Wextra -Werror=overloaded-virtual -Wfatal-errors
-DEFINES   =
+DEFINES   = -D_POSIX_C_SOURCE
 
 
 #/******************************************************************************
@@ -115,6 +115,7 @@ OBJS      = $(SOURCES:.cpp=.o)
 LIBS      =
 INCLUDES  = -I$(srcdir)
 LDFLAGS   = -shared -lpthread
+DLL       = $(LIBRARY:.so=.dll)
 
 define PKG_DATA
 prefix=$(prefix)
@@ -143,9 +144,15 @@ endif
 	$(CXX) $(CXXFLAGS) $(LDFLAGS) $(OBJS) $(LIBS) -o $(LIBRARY_PATCH)
 	$(LN_SF) $(LIBRARY_PATCH) $(LIBRARY)
 
+dll: $(OBJS)
+ifeq ($(CXX),@g++)
+	@echo -e "${GN} LINK $(DLL)${RST}"
+endif
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) -Wl,--subsystem,windows,--out-implib,$(DLL).a $(OBJS) $(LIBS) -o $(DLL) 
+
 .PHONY: clean Version.h
 clean:
-	@$(RM) -f $(OBJS) $(LIBRARY) $(LIBRARY_MAJOR) $(LIBRARY_MINOR) $(LIBRARY_PATCH) librepfunc.pc
+	@$(RM) -f $(OBJS) $(LIBRARY) $(LIBRARY_MAJOR) $(LIBRARY_MINOR) $(LIBRARY_PATCH) $(DLL) $(DLL).a librepfunc.pc
 
 install: all
 	$(file >librepfunc.pc,$(PKG_DATA))

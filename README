@@ -95,6 +95,11 @@ PATCH increased -> the API is untouched. An inprovement or bug fix was done. It
   - 1.1.0 adds ExpToStr() for w_scan_cpp > 20211009, which in turn uses the
           VDR wirbelscan-Plugin above.
 
+  - 1.1.1 merge pull request "Create relative symbolic links for shared library"
+          to improve ubuntu build system compat
+
+  - 1.1.2 add 'make dll' target to support mingw64 from msys2.
+          This allows to use the lib on WIN32.
 
 --------------------------------------------------------------------------------
 - Library Compat                                                               -
@@ -117,6 +122,19 @@ Library update:
   Find the very last installed source of this lib and execute 'make uninstall'.
   Continue with Installation Process of the newer lib.
 
+
+--------------------------------------------------------------------------------
+- mingw64 on WIN32                                                             -
+--------------------------------------------------------------------------------
+Installation (in mingw64 window):
+   make dll
+
+After that, you copy the dll and header to their destinations. Suggestion for
+a possible 'make install-dll' target where to put the dll and header are welcome.
+
+Linking to the lib is done by adding
+   -l:librepfunc.dll 
+to your programs Makefile.
 
 
 have phun,
