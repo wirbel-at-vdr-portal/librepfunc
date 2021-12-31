@@ -99,3 +99,75 @@ void HexDumpW(std::wstring intro, std::vector<unsigned char>& vec, bool to_stder
      intro = L"(null)";
   HexDump(WStrToStr(intro), vec.data(), vec.size(), to_stderr);
 }
+
+template<class T> void IntDump(std::string intro, const T* buf, size_t len, bool to_stderr) {
+  size_t addr_len = hex(len,2).size();
+  size_t len1 = 1;
+  size_t len2 = 1;
+  size_t len3 = sizeof(T) * 2;
+  size_t hdr_len = (addr_len + 1) + (16 * (1 + len3));
+
+  std::stringstream ss;
+  std::string s;
+
+  if (buf == nullptr)
+     len = 0;
+
+  if (intro.empty())
+     intro = "(null)";
+
+  /*****************************************************************************
+   * write caption and number of bytes.
+   ****************************************************************************/
+  if (intro.size() <= (hdr_len - 4)) {
+     len1 = (hdr_len - 2)/2 - (size_t) (0.5 + intro.size()/2.0);
+     len2 = (hdr_len - 2)   - (len1 + intro.size());
+     }
+
+  ss << "   "
+     << std::string(len1, '=')
+     << ' ' << intro << ' '
+     << std::string(len2, '=')
+     << std::endl
+     << "   len = " << len << std::endl;
+
+
+  /*****************************************************************************
+   * now, print rows of 16 T's
+   ****************************************************************************/
+  for(size_t i=0; i<len; i++) {
+     size_t r = i % 16;
+     T u = *(buf + i);
+
+     if (r == 0) {
+        if (i) ss << std::endl;
+        ss << "   " << hex((i/16)*16, addr_len) << ": ";
+        s = "                ";
+        }
+
+     ss << hex(u, len3) << ' ';
+     }
+
+  ss << std::endl << "   " << std::string(hdr_len, '=') << std::endl;
+
+  if (to_stderr)
+     std::cerr << ss.str() << std::endl;
+  else
+     std::cout << ss.str() << std::endl;
+}
+
+void ByteDump(std::string intro, const uint8_t* buf, size_t len, bool to_stderr) {
+  IntDump(intro, buf, len, to_stderr);
+}
+
+void WordDump(std::string intro, const uint16_t* buf, size_t len, bool to_stderr) {
+  IntDump(intro, buf, len, to_stderr);
+}
+
+void DwordDump(std::string intro, const uint32_t* buf, size_t len, bool to_stderr) {
+  IntDump(intro, buf, len, to_stderr);
+}
+
+void QwordDump(std::string intro, const uint64_t* buf, size_t len, bool to_stderr) {
+  IntDump(intro, buf, len, to_stderr);
+}

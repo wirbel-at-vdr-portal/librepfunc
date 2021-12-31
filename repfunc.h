@@ -171,6 +171,11 @@ void HexDumpW(std::wstring intro, const unsigned char* buf, size_t len, bool to_
 void HexDump(std::string intro, std::vector<unsigned char>& vec, bool to_stderr = false);
 void HexDumpW(std::wstring intro, std::vector<unsigned char>& vec, bool to_stderr = false);
 
+void ByteDump(std::string intro, const uint8_t* buf, size_t len, bool to_stderr = false);
+void WordDump(std::string intro, const uint16_t* buf, size_t len, bool to_stderr = false);
+void DwordDump(std::string intro, const uint32_t* buf, size_t len, bool to_stderr = false);
+void QwordDump(std::string intro, const uint64_t* buf, size_t len, bool to_stderr = false);
+
 
 
 /*******************************************************************************
