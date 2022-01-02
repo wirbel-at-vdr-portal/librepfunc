@@ -257,7 +257,7 @@ public:
 
 
 /*******************************************************************************
- * class cRunTime - measure the time between two points in time,
+ * class cRunTime - measures the difference between two points in time,
  *                  may be used for optimize the run time of generated code.
  *   Start()        - trigger measurement
  *   Stop()         - stop measurement, triggered by Start()
