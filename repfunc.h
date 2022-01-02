@@ -8,6 +8,7 @@
 #include <cstdint> // std::intmax_t
 #include <thread>  // std::thread
 #include <future>  // std::future, std::promise
+#include <chrono>  // std::chrono
 
 
 
@@ -252,3 +253,24 @@ public:
   void Cancel(void); // Stop the job
   void Join(void);   // Wait until job finished.
 };
+
+
+
+/*******************************************************************************
+ * class cRunTime - measure the time between two points in time,
+ *                  may be used for optimize the run time of generated code.
+ *   Start()        - trigger measurement
+ *   Stop()         - stop measurement, triggered by Start()
+ *   MilliSeconds() - the time im milli seconds, between Start() and Stop().
+ ******************************************************************************/
+class cRunTime {
+private:
+  std::chrono::time_point<std::chrono::high_resolution_clock> t1;
+  std::chrono::time_point<std::chrono::high_resolution_clock> t2;
+public:
+  cRunTime(void) {}
+  void Start(void);
+  void Stop(void);
+  double MilliSeconds(void);
+};
+
