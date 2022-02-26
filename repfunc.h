@@ -209,12 +209,13 @@ public:
  *   aFileName  - file to read or write.
  *   ss         - a stringstream to write into a file
  *   lines      - a vector of strings to write into a file
+ *   empty      - read empty lines. skipped otherwise.
  *   return value
  *              Read* : a stringstream or vector of strings from the file.
  *              Write*: true on success.
  ******************************************************************************/
 std::stringstream        ReadFileToStream(std::string aFileName);
-std::vector<std::string> ReadFile(std::string aFileName);
+std::vector<std::string> ReadFile(std::string aFileName, bool empty = false);
 
 bool WriteStreamToFile(std::string aFileName, std::stringstream& ss);
 bool WriteFile(std::string aFileName, std::vector<std::string>& lines);

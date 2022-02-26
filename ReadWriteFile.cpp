@@ -27,13 +27,13 @@ bool WriteStreamToFile(std::string aFileName, std::stringstream& ss) {
   return result;
 }
 
-std::vector<std::string> ReadFile(std::string aFileName) {
+std::vector<std::string> ReadFile(std::string aFileName, bool empty) {
   std::stringstream ss = ReadFileToStream(aFileName);
   std::string s;
   std::vector<std::string> result;
 
   while(std::getline(ss, s)) {
-     if (s.empty())
+     if (not empty and s.empty())
         continue;
      result.push_back(s);
      }
