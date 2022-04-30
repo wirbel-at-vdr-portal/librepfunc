@@ -229,6 +229,28 @@ std::string  WStrToStr(std::wstring ws);
 std::wstring StrToWStr(std::string s);
 
 
+/*******************************************************************************
+ * Wildcard match a string.
+ *   String  - the string to be tested.
+ *   Pattern - a search pattern in String.
+ *             Matching Rules:
+ *              1.  the asterisk character ('*', also called "star") matches
+ *                  zero or more characters.
+ *                  For example, "doc*" matches "doc" and "document",
+ *                  but not "dodo".
+ *              2.  the question mark '?' matches exactly one character.
+ *                  For example, the pattern "123?" will match "1234",
+ *                  but not "12345".
+ *              3.  ranges of characters enclosed in square brackets,
+ *                   '[' and ']', match a single character within the set.
+ *                  For example, "[A-Za-z]" matches any single uppercase or
+ *                  lowercase letter.
+ *                  A leading caret '^' negates the set and matches only a
+ *                  character not within the list.
+ * returns true, if the pattern matches, false otherwise.
+ ******************************************************************************/
+bool Matches(std::string String, std::string Pattern);
+
 
 /*******************************************************************************
  * ThreadBase, a base class to control a child process.
