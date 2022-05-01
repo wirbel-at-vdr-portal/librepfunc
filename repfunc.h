@@ -229,6 +229,7 @@ std::string  WStrToStr(std::wstring ws);
 std::wstring StrToWStr(std::string s);
 
 
+
 /*******************************************************************************
  * Wildcard match a string.
  *   String  - the string to be tested.
@@ -250,6 +251,7 @@ std::wstring StrToWStr(std::string s);
  * returns true, if the pattern matches, false otherwise.
  ******************************************************************************/
 bool Matches(std::string String, std::string Pattern);
+
 
 
 /*******************************************************************************
