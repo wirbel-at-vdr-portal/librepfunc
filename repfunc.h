@@ -255,6 +255,29 @@ bool Matches(std::string String, std::string Pattern);
 
 
 /*******************************************************************************
+ * Base64 encoding/decoding
+ * ToBase64   encodes a vector of bytes into a base64 string.
+ * FromBase64 decodes a base64 strint into a vector of bytes.
+ *
+ *   bytes    - a vector of bytes, to be encoded into base64.
+ *   s        - a base64 encoded string.
+ *   alphabet - the base64 alphabet to be used for conversion,
+ *              as a 64char string; ie. "ABCD..89+/"
+ *
+ * During encoding stuffing with one or two '=' chars is applied,
+ * if the number of bytes is not a multiple of three.
+ *
+ * ToBase64   returns the base64 encoded string.
+ * FromBase64 returns the raw bytes.
+ ******************************************************************************/
+std::string ToBase64(std::vector<uint8_t>& bytes, std::string& alphabet);
+std::string ToBase64(std::vector<uint8_t>& bytes);
+std::vector<uint8_t> FromBase64(std::string s, std::string& alphabet);
+std::vector<uint8_t> FromBase64(std::string s);
+
+
+
+/*******************************************************************************
  * ThreadBase, a base class to control a child process.
  ******************************************************************************/
 class ThreadBase {
