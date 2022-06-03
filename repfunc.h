@@ -257,7 +257,7 @@ bool Matches(std::string String, std::string Pattern);
 /*******************************************************************************
  * Base64 encoding/decoding
  * ToBase64   encodes a vector of bytes into a base64 string.
- * FromBase64 decodes a base64 strint into a vector of bytes.
+ * FromBase64 decodes a base64 string into a vector of bytes.
  *
  *   bytes    - a vector of bytes, to be encoded into base64.
  *   s        - a base64 encoded string.
