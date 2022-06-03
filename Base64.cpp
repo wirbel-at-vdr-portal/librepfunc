@@ -53,7 +53,7 @@ std::string ToBase64(std::vector<uint8_t>& bytes, std::string& alphabet) {
      result += alphabet[sx[2]];
      result += alphabet[sx[3]];
      len -= 3;
-     buf += 3;  
+     buf += 3;
      }
 
   if (len == 2) {
