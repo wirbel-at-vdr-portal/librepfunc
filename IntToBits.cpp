@@ -3,8 +3,7 @@
  * See the README file for copyright information and how to reach the author.
  ******************************************************************************/
 #include <repfunc.h>
-#include <sstream>   // std::stringstream
-#include <iomanip>   // std::uppercase, std::setfill, std::setw
+#include <string>    // std::string
 
 
 template<class T>
