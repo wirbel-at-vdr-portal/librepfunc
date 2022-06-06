@@ -2,6 +2,7 @@
  * librepfunc - a collection of common functions, classes and tools.
  * See the README file for copyright information and how to reach the author.
  ******************************************************************************/
+#include <array>       // std::array
 #include <repfunc.h>
 
 
