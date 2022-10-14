@@ -114,7 +114,7 @@ SOURCES  := $(wildcard $(srcdir)/*.cpp)
 OBJS      = $(SOURCES:.cpp=.o)
 LIBS      =
 INCLUDES  = -I$(srcdir)
-LDFLAGS   = -shared -lpthread
+LDFLAGS   = -shared -pthread
 DLL       = $(LIBRARY:.so=.dll)
 
 define PKG_DATA
