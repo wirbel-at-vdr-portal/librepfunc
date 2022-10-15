@@ -135,13 +135,13 @@ endef
 ifeq ($(CXX),@g++)
 	@echo -e "${BL} CXX $@${RST}"
 endif
-	$(CXX) $(CXXFLAGS) -c $(DEFINES) $(INCLUDES) -o $@ $<
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(DEFINES) $(INCLUDES) -o $@ $<
 
 all: $(OBJS)
 ifeq ($(CXX),@g++)
 	@echo -e "${GN} LINK $(LIBRARY_PATCH)${RST}"
 endif
-	$(CXX) $(CXXFLAGS) $(LDFLAGS) -Wl,-soname,$(LIBRARY_MAJOR) $(OBJS) $(LIBS) -o $(LIBRARY_PATCH)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -Wl,-soname,$(LIBRARY_MAJOR) $(OBJS) $(LIBS) -o $(LIBRARY_PATCH)
 	$(LN_SF) $(LIBRARY_PATCH) $(LIBRARY)
 
 dll: $(OBJS)
