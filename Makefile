@@ -110,7 +110,7 @@ man4dir          = $(mandir)/man4
 man5dir          = $(mandir)/man5
 pkgconfigdir     = /usr/lib/pkgconfig
 
-SOURCES  := $(wildcard $(srcdir)/*.cpp)
+SOURCES  := $(sort $(wildcard $(srcdir)/*.cpp))
 OBJS      = $(SOURCES:.cpp=.o)
 LIBS      =
 INCLUDES  = -I$(srcdir)
