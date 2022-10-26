@@ -1,6 +1,11 @@
 These persons contributed to this open-source library.
 Thanks to them for..
 
+
+Alexander Grothe <seahawk1986@hotmail.com>
+ - for pointing out the need for relative symbolic links and his
+   pull request for it.
+
 Fab Stz <fabstz-it@yahoo.fr>
  - for improving builds on debian
  - for reporting the use of -lpthread instead of -pthread in Makefile
