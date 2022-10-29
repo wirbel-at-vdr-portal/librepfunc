@@ -166,7 +166,7 @@ install: all
 	$(LN_SFR) $(DESTDIR)$(libdir)/$(LIBRARY_PATCH) $(DESTDIR)$(libdir)/$(LIBRARY_MINOR)
 	$(LN_SFR) $(DESTDIR)$(libdir)/$(LIBRARY_MINOR) $(DESTDIR)$(libdir)/$(LIBRARY_MAJOR)
 	$(LN_SFR) $(DESTDIR)$(libdir)/$(LIBRARY_MAJOR) $(DESTDIR)$(libdir)/$(LIBRARY)
-	$(INSTALL_DATA) COPYING README $(DESTDIR)$(docdir)
+	$(INSTALL_DATA) CONTRIBUTORS COPYING README $(DESTDIR)$(docdir)
 	$(INSTALL_DATA) librepfunc.pc $(DESTDIR)$(pkgconfigdir)
 
 #	$(INSTALL_DATA) doc/librepfunc.1 $(DESTDIR)$(man1dir)
@@ -177,6 +177,7 @@ uninstall:
 	$(RM) -f $(DESTDIR)$(libdir)/$(LIBRARY_MAJOR)
 	$(RM) -f $(DESTDIR)$(libdir)/$(LIBRARY)
 	$(RM) -f $(DESTDIR)$(includedir)/repfunc.h
+	$(RM) -f $(DESTDIR)$(docdir)/CONTRIBUTORS
 	$(RM) -f $(DESTDIR)$(docdir)/COPYING
 	$(RM) -f $(DESTDIR)$(docdir)/README
 	$(RM) -rf $(DESTDIR)$(docdir)
