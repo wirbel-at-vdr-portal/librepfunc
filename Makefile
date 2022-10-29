@@ -137,7 +137,7 @@ ifeq ($(CXX),@g++)
 endif
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(DEFINES) $(INCLUDES) -o $@ $<
 
-all: $(OBJS)
+$(LIBRARY_PATCH): $(OBJS)
 ifeq ($(CXX),@g++)
 	@echo -e "${GN} LINK $(LIBRARY_PATCH)${RST}"
 endif
