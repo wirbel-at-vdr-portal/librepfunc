@@ -153,7 +153,7 @@ endif
 
 .PHONY: clean Version.h
 clean:
-	@$(RM) -f $(OBJS) $(LIBRARY) $(LIBRARY_MAJOR) $(LIBRARY_MINOR) $(LIBRARY_PATCH) $(DLL) $(DLL).a librepfunc.pc
+	@$(RM) -f $(OBJS) $(LIBRARY) $(LIBRARY_PATCH) $(DLL) $(DLL).a librepfunc.pc
 
 install: all
 	$(file >librepfunc.pc,$(PKG_DATA))
