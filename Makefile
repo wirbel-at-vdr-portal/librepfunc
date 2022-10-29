@@ -144,7 +144,9 @@ endif
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -Wl,-soname,$(LIBRARY_MAJOR) $(OBJS) $(LIBS) -o $(LIBRARY_PATCH)
 	$(LN_SF) $(LIBRARY_PATCH) $(LIBRARY)
 
-dll: $(OBJS)
+dll: $(DLL)
+
+$(DLL): $(OBJS)
 ifeq ($(CXX),@g++)
 	@echo -e "${GN} LINK $(DLL)${RST}"
 endif
