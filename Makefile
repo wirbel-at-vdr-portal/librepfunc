@@ -155,7 +155,7 @@ endif
 clean:
 	@$(RM) -f $(OBJS) $(LIBRARY) $(LIBRARY_PATCH) $(DLL) $(DLL).a librepfunc.pc
 
-install: all
+install: $(LIBRARY_PATCH)
 	$(file >librepfunc.pc,$(PKG_DATA))
 	$(MKDIR_P) $(DESTDIR)$(libdir)
 	$(MKDIR_P) $(DESTDIR)$(includedir)
