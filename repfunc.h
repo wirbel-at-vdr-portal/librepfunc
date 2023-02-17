@@ -324,3 +324,15 @@ public:
   double MilliSeconds(void);
 };
 
+/*******************************************************************************
+ * Appends vector Tail to vector Dest.
+ ******************************************************************************/
+template<class T> void AppendVector(std::vector<T>& Dest, std::vector<T>& Tail, bool Move = false) {
+  if (Move and Dest.empty()) {
+     Dest = std::move(Tail);
+     return;
+     }
+  Dest.reserve(Dest.size() + Tail.size());
+  Dest.insert(std::end(Dest), std::begin(Tail), std::end(Tail));
+};
+
