@@ -185,6 +185,16 @@ uninstall:
 	$(RM) -f $(DESTDIR)$(man1dir)/librepfunc.1
 	$(RM) -f $(DESTDIR)$(pkgconfigdir)/librepfunc.pc
 
+dist: clean
+	@-$(RM) -rf librepfunc.so*
+	@-$(RM) -rf librepfunc.dll*
+	@-$(RM) -rf *.tar.bz2
+	@-$(RM) -rf $(tmpdir)/$(LIBRARY_PATCH)
+	@$(MKDIR_P) $(tmpdir)/$(LIBRARY_PATCH)
+	@$(CP) -a * $(tmpdir)/$(LIBRARY_PATCH)
+	@$(TAR) cfj $(LIBRARY_PATCH).tar.bz2 -C $(tmpdir) $(LIBRARY_PATCH)
+	@-$(RM) -rf $(tmpdir)/$(LIBRARY_PATCH)
+	@echo Distribution package created as $(LIBRARY_PATCH).tar.bz2
 
 
 #/******************************************************************************
