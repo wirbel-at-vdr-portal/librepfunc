@@ -17,6 +17,7 @@ PATCH = 0
 
 
 LIBRARY = librepfunc.so
+LIBSTAT = librepfunc.a
 LIBRARY_MAJOR = $(LIBRARY).$(MAJOR)
 LIBRARY_MINOR = $(LIBRARY_MAJOR).$(MINOR)
 LIBRARY_PATCH = $(LIBRARY_MINOR).$(PATCH)
@@ -59,6 +60,7 @@ GN=\e[1;32m
 #/******************************************************************************
 # * programs, override if on different paths.
 # *****************************************************************************/
+AR              ?= ar
 CD              ?= cd
 CP              ?= cp
 CHMOD           ?= chmod
@@ -142,6 +144,7 @@ ifeq ($(CXX),@g++)
 	@echo -e "${GN} LINK $(LIBRARY_PATCH)${RST}"
 endif
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -Wl,-soname,$(LIBRARY_MAJOR) $(OBJS) $(LIBS) -o $(LIBRARY_PATCH)
+	@$(AR) r -c $(LIBSTAT) $(OBJS)
 
 dll: $(DLL)
 
@@ -153,7 +156,7 @@ endif
 
 .PHONY: clean Version.h
 clean:
-	@$(RM) -f $(OBJS) $(LIBRARY) $(LIBRARY_PATCH) $(DLL) $(DLL).a librepfunc.pc
+	@$(RM) -f $(OBJS) $(LIBRARY) $(LIBSTAT) $(LIBRARY_PATCH) $(DLL) $(DLL).a librepfunc.pc
 
 install: $(LIBRARY_PATCH)
 	$(file >librepfunc.pc,$(PKG_DATA))
@@ -163,6 +166,7 @@ install: $(LIBRARY_PATCH)
 	$(MKDIR_P) $(DESTDIR)$(man1dir)
 	$(MKDIR_P) $(DESTDIR)$(pkgconfigdir)
 	$(INSTALL_PROGRAM) $(LIBRARY_PATCH) $(DESTDIR)$(libdir)
+	$(INSTALL_PROGRAM) $(LIBSTAT) $(DESTDIR)$(libdir)
 	$(INSTALL_DATA) repfunc.h $(DESTDIR)$(includedir)
 	$(LN_SFR) $(DESTDIR)$(libdir)/$(LIBRARY_PATCH) $(DESTDIR)$(libdir)/$(LIBRARY_MINOR)
 	$(LN_SFR) $(DESTDIR)$(libdir)/$(LIBRARY_MINOR) $(DESTDIR)$(libdir)/$(LIBRARY_MAJOR)
@@ -177,6 +181,7 @@ uninstall:
 	$(RM) -f $(DESTDIR)$(libdir)/$(LIBRARY_MINOR)
 	$(RM) -f $(DESTDIR)$(libdir)/$(LIBRARY_MAJOR)
 	$(RM) -f $(DESTDIR)$(libdir)/$(LIBRARY)
+	$(RM) -f $(DESTDIR)$(libdir)/$(LIBSTAT)
 	$(RM) -f $(DESTDIR)$(includedir)/repfunc.h
 	$(RM) -f $(DESTDIR)$(docdir)/CONTRIBUTORS
 	$(RM) -f $(DESTDIR)$(docdir)/COPYING
@@ -187,6 +192,7 @@ uninstall:
 
 dist: clean
 	@-$(RM) -rf librepfunc.so*
+	@-$(RM) -rf librepfunc.a
 	@-$(RM) -rf librepfunc.dll*
 	@-$(RM) -rf *.tar.bz2
 	@-$(RM) -rf $(tmpdir)/$(LIBRARY_PATCH)
