@@ -338,3 +338,10 @@ template<class T> void AppendVector(std::vector<T>& Dest, std::vector<T>& Tail, 
   Dest.insert(std::end(Dest), std::begin(Tail), std::end(Tail));
 };
 
+
+
+/*******************************************************************************
+ * Version info. Returns a human readable version string, like "1.7.0".
+ ******************************************************************************/
+std::string RepfuncVersion(void);
+  
