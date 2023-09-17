@@ -11,12 +11,13 @@
 #   - MINOR++  -> API-compatible, but new functionality
 #   - PATCH++  -> API untouched changes
 MAJOR = 1
-MINOR = 7
+MINOR = 8
 PATCH = 0
 
 
 
 LIBRARY = librepfunc.so
+LIBRARY_STATIC = $(LIBRARY:.so=.a)
 LIBRARY_MAJOR = $(LIBRARY).$(MAJOR)
 LIBRARY_MINOR = $(LIBRARY_MAJOR).$(MINOR)
 LIBRARY_PATCH = $(LIBRARY_MINOR).$(PATCH)
@@ -60,6 +61,7 @@ GN=\e[1;32m
 #/******************************************************************************
 # * programs, override if on different paths.
 # *****************************************************************************/
+AR               = @ar
 CD              ?= cd
 CP              ?= cp
 CHMOD           ?= chmod
@@ -75,6 +77,7 @@ MAKE            ?= make
 MKDIR           ?= mkdir
 MKDIR_P         ?= ${MKDIR} -p
 PKG_CONFIG      ?= pkg-config
+RANLIB          ?= @ranlib
 RM              ?= rm
 SED             ?= sed
 SHELL            = /bin/sh
@@ -144,6 +147,16 @@ ifeq ($(CXX),@g++)
 endif
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -Wl,-soname,$(LIBRARY_MAJOR) $(OBJS) $(LIBS) -o $(LIBRARY_PATCH)
 
+$(LIBRARY_STATIC): $(OBJS)
+ifeq ($(AR),@ar)
+	@echo -e "${GN} CREATE $(LIBRARY_STATIC)${RST}"
+endif
+	$(AR) -r -c $(LIBRARY_STATIC) $(OBJS)
+ifeq ($(RANLIB),@ranlib)
+	@echo -e "${GN} RANLIB $(LIBRARY_STATIC)${RST}"
+endif
+	$(RANLIB) $(LIBRARY_STATIC)
+
 dll: $(DLL)
 
 $(DLL): $(OBJS)
@@ -154,7 +167,7 @@ endif
 
 .PHONY: clean Version.h
 clean:
-	@$(RM) -f $(OBJS) $(LIBRARY) $(LIBRARY_PATCH) $(DLL) $(DLL).a librepfunc.pc
+	@$(RM) -f $(OBJS) $(LIBRARY) $(LIBRARY_PATCH) $(LIBRARY_STATIC) $(DLL) $(DLL).a librepfunc.pc
 
 install: $(LIBRARY_PATCH)
 	$(file >librepfunc.pc,$(PKG_DATA))
@@ -170,14 +183,28 @@ install: $(LIBRARY_PATCH)
 	$(LN_SFR) $(DESTDIR)$(libdir)/$(LIBRARY_MAJOR) $(DESTDIR)$(libdir)/$(LIBRARY)
 	$(INSTALL_DATA) CONTRIBUTORS COPYING README $(DESTDIR)$(docdir)
 	$(INSTALL_DATA) librepfunc.pc $(DESTDIR)$(pkgconfigdir)
-
 #	$(INSTALL_DATA) doc/librepfunc.1 $(DESTDIR)$(man1dir)
+
+install-static: $(LIBRARY_STATIC)
+	$(file >librepfunc.pc,$(PKG_DATA))
+	$(MKDIR_P) $(DESTDIR)$(libdir)
+	$(MKDIR_P) $(DESTDIR)$(includedir)
+	$(MKDIR_P) $(DESTDIR)$(docdir)
+	$(MKDIR_P) $(DESTDIR)$(man1dir)
+	$(MKDIR_P) $(DESTDIR)$(pkgconfigdir)
+	$(INSTALL_PROGRAM) $(LIBRARY_STATIC) $(DESTDIR)$(libdir)
+	$(INSTALL_DATA) repfunc.h $(DESTDIR)$(includedir)
+	$(INSTALL_DATA) CONTRIBUTORS COPYING README $(DESTDIR)$(docdir)
+	$(INSTALL_DATA) librepfunc.pc $(DESTDIR)$(pkgconfigdir)
+#	$(INSTALL_DATA) doc/librepfunc.1 $(DESTDIR)$(man1dir)
+
 
 uninstall:
 	$(RM) -f $(DESTDIR)$(libdir)/$(LIBRARY_PATCH)
 	$(RM) -f $(DESTDIR)$(libdir)/$(LIBRARY_MINOR)
 	$(RM) -f $(DESTDIR)$(libdir)/$(LIBRARY_MAJOR)
 	$(RM) -f $(DESTDIR)$(libdir)/$(LIBRARY)
+	$(RM) -f $(DESTDIR)$(libdir)/$(LIBRARY_STATIC)
 	$(RM) -f $(DESTDIR)$(includedir)/repfunc.h
 	$(RM) -f $(DESTDIR)$(docdir)/CONTRIBUTORS
 	$(RM) -f $(DESTDIR)$(docdir)/COPYING
@@ -187,6 +214,7 @@ uninstall:
 	$(RM) -f $(DESTDIR)$(pkgconfigdir)/librepfunc.pc
 
 dist: clean
+	@-$(RM) -rf $(LIBRARY_STATIC)
 	@-$(RM) -rf librepfunc.so*
 	@-$(RM) -rf librepfunc.dll*
 	@-$(RM) -rf *.tar.bz2
@@ -212,3 +240,5 @@ printvars:
 	@echo "OBJS               = $(OBJS)"
 	@echo "LIBS               = $(LIBS)"
 	@echo "LDFLAGS            = $(LDFLAGS)"
+	@echo "AR                 = $(AR)"
+	@echo "RANLIB             = $(RANLIB)"

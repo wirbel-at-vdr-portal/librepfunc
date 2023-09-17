@@ -122,6 +122,10 @@ Library update:
   Find the very last installed source of this lib and execute 'make uninstall'.
   Continue with Installation Process of the newer lib.
 
+It's possible to build a static version of librepfunc (librepfunc.a):
+   make -j8
+   sudo make install-static
+
 
 --------------------------------------------------------------------------------
 - mingw64 on WIN32                                                             -
