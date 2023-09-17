@@ -123,7 +123,7 @@ Library update:
   Continue with Installation Process of the newer lib.
 
 It's possible to build a static version of librepfunc (librepfunc.a):
-   make -j8
+   make -j8 librepfunc.a
    sudo make install-static
 
 
