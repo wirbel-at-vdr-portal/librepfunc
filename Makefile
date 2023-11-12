@@ -32,7 +32,7 @@ URL = https://github.com/wirbel-at-vdr-portal/librepfunc
 #/******************************************************************************
 # * if you prefer verbose non-coloured build messages, remove the '@' here:
 # *****************************************************************************/
-CXX = @g++
+CXX ?= @g++
 CXXFLAGS += -g -O3 -fPIC -Wall -Wextra -Werror=overloaded-virtual -Wfatal-errors
 CXXFLAGS += -DVERSION=\"$(VERSION)\"
 DEFINES   = -D_POSIX_C_SOURCE
@@ -61,7 +61,7 @@ GN=\e[1;32m
 #/******************************************************************************
 # * programs, override if on different paths.
 # *****************************************************************************/
-AR               = @ar
+AR              ?= @ar
 CD              ?= cd
 CP              ?= cp
 CHMOD           ?= chmod
