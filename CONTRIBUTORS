@@ -13,3 +13,9 @@ Fab Stz <fabstz-it@yahoo.fr>
  - for a Makefile patch to add reproducable builds
  - for pointing out, that the linker is called every time in Makefile,
    even if the lib or dll was already created.
+
+Lars The
+ - for a PR enabling static library builds.
+
+Rudi Heitbaum
+ - for a PR fixing the installed static libs file permissions.
