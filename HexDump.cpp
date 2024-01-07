@@ -108,7 +108,6 @@ template<class T> void IntDump(std::string intro, const T* buf, size_t len, bool
   size_t hdr_len = (addr_len + 1) + (16 * (1 + len3));
 
   std::stringstream ss;
-  std::string s;
 
   if (buf == nullptr)
      len = 0;
@@ -142,7 +141,6 @@ template<class T> void IntDump(std::string intro, const T* buf, size_t len, bool
      if (r == 0) {
         if (i) ss << std::endl;
         ss << "   " << hex((i/16)*16, addr_len) << ": ";
-        s = "                ";
         }
 
      ss << hex(u, len3) << ' ';
