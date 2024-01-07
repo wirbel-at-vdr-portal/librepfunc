@@ -65,6 +65,7 @@ AR               = @ar
 CD              ?= cd
 CP              ?= cp
 CHMOD           ?= chmod
+CPPCHECK        ?= cppcheck
 GIT             ?= git
 INSTALL         ?= install
 INSTALL_PROGRAM ?= $(INSTALL) -m 755
@@ -167,7 +168,7 @@ endif
 
 .PHONY: clean Version.h
 clean:
-	@$(RM) -f $(OBJS) $(LIBRARY) $(LIBRARY_PATCH) $(LIBRARY_STATIC) $(DLL) $(DLL).a librepfunc.pc
+	@$(RM) -f $(OBJS) $(LIBRARY)* $(LIBRARY_STATIC) $(DLL) $(DLL).a librepfunc.pc
 
 install: $(LIBRARY_PATCH)
 	$(file >librepfunc.pc,$(PKG_DATA))
@@ -225,6 +226,10 @@ dist: clean
 	@-$(RM) -rf $(tmpdir)/$(LIBRARY_PATCH)
 	@echo Distribution package created as $(LIBRARY_PATCH).tar.bz2
 
+SUPPRESS_CHECK = --suppress=missingIncludeSystem --suppress=unusedFunction --suppress=passedByValue --suppress=constParameterReference
+
+cppcheck:
+	$(CPPCHECK) --enable=all $(SUPPRESS_CHECK) --include=./repfunc.h $(SOURCES) 
 
 #/******************************************************************************
 # * debug
