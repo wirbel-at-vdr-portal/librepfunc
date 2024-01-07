@@ -45,7 +45,7 @@ bool WriteFile(std::string aFileName, std::vector<std::string>& lines) {
   if (os.fail())
      return false;
 
-  for(auto s:lines)
+  for(const auto& s:lines)
      os << s << std::endl;
   bool result = os.good();
   os.close();
