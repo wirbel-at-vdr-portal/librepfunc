@@ -142,6 +142,15 @@ std::string TimeStr(std::intmax_t t = 0);
 
 
 /*******************************************************************************
+ * returns an ISO8601 time string: yyyy-mm-ddTHH:MM:SS{Z,+,−}[HH:MM].
+ * example: 2024-02-18T12:47:27+01:00
+ * If t is given, it's read as a time_t.
+ ******************************************************************************/
+std::string ISO8601Date(std::intmax_t t = 0);
+
+
+
+/*******************************************************************************
  * conversion from 4-bit BCD value to decimal value, ie 0x0192 -> 192
  ******************************************************************************/
 std::intmax_t BCDtoDecimal(std::intmax_t bcd);
