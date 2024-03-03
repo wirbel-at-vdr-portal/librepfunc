@@ -24,6 +24,7 @@ std::string ISO8601Date(std::intmax_t t) {
   struct tm buf;
   struct tm* tm = localtime_r(&aTime, &buf);
 
+  #if !defined(__MINGW32__) && !defined(__MING64__)
   std::string UTC_Offset;
   if (tm->tm_gmtoff != 0) {
      if (tm->tm_gmtoff > 0)
@@ -36,6 +37,10 @@ std::string ISO8601Date(std::intmax_t t) {
      }
   else
      UTC_Offset = "Z";
+  #else
+     /* msys2/mingw64 doesn't have tm_gmtoff */
+     const char* UTC_Offset = "Z";
+  #endif
 
   return IntToStr(1900+tm->tm_year,4) +
          '-' +
