@@ -1,0 +1,18 @@
+/*******************************************************************************
+ * NOTE NOTE NOTE:
+ *
+ * with librepfunc 1.10.0, any changes are/should! documented here in this file.
+ * If you find any change not documented here, pls create an issue on github on
+ * this topic.
+ * Or, even better, directly create an pull request.
+ *
+ * Thank you, wirbel.
+ ******************************************************************************/
+
+
+1.10.0, 20240314
+-------------------------------------------------------------------------------
+ * add micro seconds measurement to cRunTime. This add-on should not break
+   anything.
+   -> API-compatible, but new functionality, 1.9.1 -> 1.10.0 
+ * add missing HISTORY file
