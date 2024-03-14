@@ -11,8 +11,8 @@
 #   - MINOR++  -> API-compatible, but new functionality
 #   - PATCH++  -> API untouched changes
 MAJOR = 1
-MINOR = 9
-PATCH = 1
+MINOR = 10
+PATCH = 0
 
 
 

@@ -331,6 +331,7 @@ public:
   void Start(void);
   void Stop(void);
   double MilliSeconds(void);
+  double MicroSeconds(void);
 };
 
 
