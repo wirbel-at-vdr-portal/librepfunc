@@ -75,6 +75,7 @@ std::string IntToStr(std::intmax_t n);
 std::string IntToStr(std::intmax_t n, size_t width, bool left);
 std::string IntToStr(std::intmax_t n, size_t width, bool left, char fill);
 std::string IntToHex(std::intmax_t n, size_t width);
+std::string IntToOct(std::intmax_t n, size_t width);
 std::string IntToBits(std::intmax_t n, size_t width);
 std::string FloatToStr(double n);
 std::string FloatToStr(double n, size_t width, size_t precision, bool left);
@@ -94,6 +95,7 @@ std::string ExpToStr(double n, size_t precision);
 std::wstring IntToStrW(std::intmax_t n);
 std::wstring IntToStrW(std::intmax_t n, size_t width, bool left);
 std::wstring IntToStrW(std::intmax_t n, size_t width, bool left, wchar_t fill);
+std::wstring IntToOctW(std::intmax_t n, size_t width);
 std::wstring IntToHexW(std::intmax_t n, size_t width);
 std::wstring IntToBitsW(std::intmax_t n, size_t width);
 std::wstring FloatToStrW(double n);
@@ -191,11 +193,30 @@ void QwordDump(std::string intro, const uint64_t* buf, size_t len, bool to_stder
 
 
 /*******************************************************************************
+ * DirectoryExists() - returns true, if a directory exists.
+ *   aDirectory - dir name in utf8 (Note: 7bit ascii is valid utf8)
+ ******************************************************************************/
+bool DirectoryExists(std::string aDirectory);
+bool DirectoryExistsW(std::wstring aDirectory);
+
+
+
+/*******************************************************************************
  * FileExists() - returns true, if a file exists.
  *   aFile     - filen name in utf8 (Note: 7bit ascii is valid utf8)
  ******************************************************************************/
 bool FileExists(std::string aFile);
 bool FileExistsW(std::wstring aFile);
+
+
+
+/*******************************************************************************
+ * CreateDir() - returns true, the if directory was successfully created.
+ *   aDirectory - dir name in utf8 (Note: 7bit ascii is valid utf8)
+ *   aMode      - dir permissions, ignored on MinGW.
+ ******************************************************************************/
+bool CreateDir(std::string aDirectory, size_t aMode = 0755);
+bool CreateDirW(std::wstring aDirectory, size_t aMode = 0755);
 
 
 

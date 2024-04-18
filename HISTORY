@@ -16,3 +16,13 @@
    anything.
    -> API-compatible, but new functionality, 1.9.1 -> 1.10.0 
  * add missing HISTORY file
+
+1.11.0, 20240418
+-------------------------------------------------------------------------------
+ * add DirectoryExists()
+ * add CreateDir()
+ * add IntToOct()
+
+ These add-on's should not break anything.
+   -> API-compatible, but new functionality, 1.10.0 -> 1.11.0 
+
