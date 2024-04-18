@@ -22,7 +22,7 @@
  * add DirectoryExists()
  * add CreateDir()
  * add IntToOct()
-
+ * add IsAsciiFile()
  These add-on's should not break anything.
    -> API-compatible, but new functionality, 1.10.0 -> 1.11.0 
 

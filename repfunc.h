@@ -203,7 +203,7 @@ bool DirectoryExistsW(std::wstring aDirectory);
 
 /*******************************************************************************
  * FileExists() - returns true, if a file exists.
- *   aFile     - filen name in utf8 (Note: 7bit ascii is valid utf8)
+ *   aFile     - file name in utf8 (Note: 7bit ascii is valid utf8)
  ******************************************************************************/
 bool FileExists(std::string aFile);
 bool FileExistsW(std::wstring aFile);
@@ -251,6 +251,16 @@ std::vector<std::string> ReadFile(std::string aFileName, bool empty = false);
 
 bool WriteStreamToFile(std::string aFileName, std::stringstream& ss);
 bool WriteFile(std::string aFileName, std::vector<std::string>& lines);
+
+
+
+/*******************************************************************************
+ * IsAsciiFile() - returns true, if a file exists and is an ASCII file.
+ * If the file contains any other character than horizontal tab, space or
+ * printable ASCII chars, the function will return false.
+ *   aFile     - file name in utf8 (Note: 7bit ascii is valid utf8)
+ ******************************************************************************/
+bool IsAsciiFile(std::string aFileName);
 
 
 
