@@ -32,7 +32,9 @@ URL = https://github.com/wirbel-at-vdr-portal/librepfunc
 #/******************************************************************************
 # * if you prefer verbose non-coloured build messages, remove the '@' here:
 # *****************************************************************************/
-CXX = @g++
+Q = @
+
+CXX ?= g++
 CXXFLAGS += -g -O3 -fPIC -Wall -Wextra -Werror=overloaded-virtual -Wfatal-errors
 CXXFLAGS += -DVERSION=\"$(VERSION)\"
 DEFINES   = -D_POSIX_C_SOURCE
@@ -61,7 +63,7 @@ GN=\e[1;32m
 #/******************************************************************************
 # * programs, override if on different paths.
 # *****************************************************************************/
-AR               = @ar
+AR              ?= ar
 CD              ?= cd
 CP              ?= cp
 CHMOD           ?= chmod
@@ -137,34 +139,34 @@ Cflags: -I$${includedir}
 endef
 
 %.o: %.cpp
-ifeq ($(CXX),@g++)
+ifeq ($(Q),@)
 	@echo -e "${BL} CXX $@${RST}"
 endif
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(DEFINES) $(INCLUDES) -o $@ $<
+	$(Q)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(DEFINES) $(INCLUDES) -o $@ $<
 
 $(LIBRARY_PATCH): $(OBJS)
-ifeq ($(CXX),@g++)
+ifeq ($(Q),@)
 	@echo -e "${GN} LINK $(LIBRARY_PATCH)${RST}"
 endif
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -Wl,-soname,$(LIBRARY_MAJOR) $(OBJS) $(LIBS) -o $(LIBRARY_PATCH)
+	$(Q)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -Wl,-soname,$(LIBRARY_MAJOR) $(OBJS) $(LIBS) -o $(LIBRARY_PATCH)
 
 $(LIBRARY_STATIC): $(OBJS)
-ifeq ($(AR),@ar)
+ifeq ($(Q),@)
 	@echo -e "${GN} CREATE $(LIBRARY_STATIC)${RST}"
 endif
-	$(AR) -r -c $(LIBRARY_STATIC) $(OBJS)
-ifeq ($(RANLIB),@ranlib)
+	$(Q)$(AR) -r -c $(LIBRARY_STATIC) $(OBJS)
+ifeq ($(Q),@)
 	@echo -e "${GN} RANLIB $(LIBRARY_STATIC)${RST}"
 endif
-	$(RANLIB) $(LIBRARY_STATIC)
+	$(Q)$(RANLIB) $(LIBRARY_STATIC)
 
 dll: $(DLL)
 
 $(DLL): $(OBJS)
-ifeq ($(CXX),@g++)
+ifeq ($(Q),@)
 	@echo -e "${GN} LINK $(DLL)${RST}"
 endif
-	$(CXX) $(CXXFLAGS) $(LDFLAGS) -Wl,--subsystem,windows,--out-implib,$(DLL).a $(OBJS) $(LIBS) -o $(DLL) 
+	$(Q)$(CXX) $(CXXFLAGS) $(LDFLAGS) -Wl,--subsystem,windows,--out-implib,$(DLL).a $(OBJS) $(LIBS) -o $(DLL) 
 
 .PHONY: clean Version.h
 clean:
