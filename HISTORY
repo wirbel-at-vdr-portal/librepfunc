@@ -20,9 +20,14 @@
 1.11.0, 20240418
 -------------------------------------------------------------------------------
  * add DirectoryExists()
+ * add ExtractFilePath()
+ * add ExtractFileName()
  * add CreateDir()
+ * add RemoveDir()
  * add IntToOct()
  * add IsAsciiFile()
+ * add SystemExecute()
+ * add wget()
  These add-on's should not break anything.
-   -> API-compatible, but new functionality, 1.10.0 -> 1.11.0 
+   -> API-compatible, but new functionality, 1.10.0 -> 1.11.0
 

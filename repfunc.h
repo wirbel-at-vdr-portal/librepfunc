@@ -211,12 +211,42 @@ bool FileExistsW(std::wstring aFile);
 
 
 /*******************************************************************************
+ * ExtractFilePath returns the path part from aFile. The path consists of all
+ * characters before the last directory separator character ('/' or '\'),
+ * including the directory separator itself.
+ *   aFile     - file name in utf8 (Note: 7bit ascii is valid utf8)
+ ******************************************************************************/
+std::string ExtractFilePath(std::string aFile);
+std::wstring ExtractFilePathW(std::wstring aFile);
+
+
+
+/*******************************************************************************
+ * ExtractFileName returns the filename part from aFile. The filename consists
+ * of all characters after the last directory separator character ('/' or '\').
+ *   aFile     - file name in utf8 (Note: 7bit ascii is valid utf8)
+ ******************************************************************************/
+std::string ExtractFileName(std::string aFile);
+std::wstring ExtractFileNameW(std::wstring aFile);
+
+
+
+/*******************************************************************************
  * CreateDir() - returns true, the if directory was successfully created.
  *   aDirectory - dir name in utf8 (Note: 7bit ascii is valid utf8)
  *   aMode      - dir permissions, ignored on MinGW.
  ******************************************************************************/
 bool CreateDir(std::string aDirectory, size_t aMode = 0755);
 bool CreateDirW(std::wstring aDirectory, size_t aMode = 0755);
+
+
+
+/*******************************************************************************
+ * RemoveDir() - returns true, the if directory was successfully removed.
+ *   aDirectory - dir name in utf8 (Note: 7bit ascii is valid utf8)
+ ******************************************************************************/
+bool RemoveDir(std::string aDirectory);
+bool RemoveDirW(std::wstring aDirectory);
 
 
 
@@ -320,6 +350,30 @@ std::vector<uint8_t> FromBase64(std::string s);
 
 
 /*******************************************************************************
+ * Execute a process using popen().
+ *
+ *   process  - the full path to the command.
+ *   message  - a string that receives the commands response.
+ *
+ * returns 0, if the command succeeded, non-zero otherwise.
+ ******************************************************************************/
+int SystemExecute(const std::string& process, std::string& message);
+
+
+
+/*******************************************************************************
+ * Download a file using system binary 'wget', using SystemExecute().
+ *
+ *   Addr     - the download address
+ *   Dest     - the destination to store the file.
+ *
+ * returns the stdout of wget.
+ ******************************************************************************/
+std::string wget(std::string& Addr, std::string& Dest);
+
+
+
+/*******************************************************************************
  * ThreadBase, a base class to control a child process.
  ******************************************************************************/
 class ThreadBase {
@@ -385,4 +439,3 @@ template<class T> void AppendVector(std::vector<T>& Dest, std::vector<T>& Tail, 
  * Version info. Returns a human readable version string, like "1.7.0".
  ******************************************************************************/
 std::string RepfuncVersion(void);
-  
