@@ -34,3 +34,6 @@
    This change was requested a while ago by heitbaum, see PR #4 to allow cross
    compile.
 
+1.11.1, 20240501
+-------------------------------------------------------------------------------
+ * bug: BackFill() should take UTF-8 {2,3,4}-byte encoded chars into account
