@@ -3,26 +3,29 @@
  * See the README file for copyright information and how to reach the author.
  ******************************************************************************/
 #include <repfunc.h>
-#include <codecvt>    // std::codecvt_utf8
-#include <locale>     // std::wstring_convert
+#include <clocale>    // std::setlocale
+#include <cstdlib>    // std::wcstombs, std::mbstowcs
 
-
-/* NOTE: this code needs to be modified in future,
- *       as C++17 deprecated std::codecvt_utf8
- *
- * https://www.geeksforgeeks.org/cpp/wcstombs-function-in-c-stl/
+/* 20251210: replace deprecated std::codecvt_utf8 with
+ *           std::wcstombs, std::mbstowcs
+ * https://en.cppreference.com/w/cpp/string/multibyte/mbstowcs.html
+ * https://en.cppreference.com/w/cpp/string/multibyte/wcstombs.html
  */
 
 std::string WStrToStr(std::wstring ws) {
   if (ws.empty())
      return "";
-  std::wstring_convert<std::codecvt_utf8<wchar_t>> Utf8;
-  return Utf8.to_bytes(ws);
+  auto* wstr = (const wchar_t*) ws.c_str();
+  char mbstr[256];
+  std::wcstombs(mbstr, wstr, sizeof(mbstr));
+  return (const char*) mbstr;
 }
 
 std::wstring StrToWStr(std::string s) {
   if (s.empty())
      return L"";
-  std::wstring_convert<std::codecvt_utf8<wchar_t>> Utf8;
-  return Utf8.from_bytes(s);
+  auto* mbstr = s.c_str();
+  wchar_t wstr[256];
+  std::mbstowcs(wstr, mbstr, sizeof(wstr)/sizeof(wstr[0]));
+  return (const wchar_t*) wstr;
 }
