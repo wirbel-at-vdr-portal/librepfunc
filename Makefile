@@ -12,7 +12,7 @@
 #   - PATCH++  -> API untouched changes
 MAJOR = 1
 MINOR = 11
-PATCH = 1
+PATCH = 2
 
 
 
