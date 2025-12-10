@@ -31,10 +31,8 @@ std::intmax_t StrToIntT(const std::basic_string<T>& s, size_t* pos, size_t base,
         }
      catch(const std::exception& e) {
         std::cerr << f
-               << ": ERROR: cannot convert '"
-               << (const T*)s.c_str()
-               << "' to integer: "
-               << (const T*)e.what() << std::endl;
+               << ": ERROR: cannot convert to integer: "
+               << e.what() << std::endl;
         return err;
         }
      }

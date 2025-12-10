@@ -9,6 +9,8 @@
 
 /* NOTE: this code needs to be modified in future,
  *       as C++17 deprecated std::codecvt_utf8
+ *
+ * https://www.geeksforgeeks.org/cpp/wcstombs-function-in-c-stl/
  */
 
 std::string WStrToStr(std::wstring ws) {
