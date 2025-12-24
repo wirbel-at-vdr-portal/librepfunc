@@ -37,3 +37,8 @@
 1.11.1, 20240501
 -------------------------------------------------------------------------------
  * bug: BackFill() should take UTF-8 {2,3,4}-byte encoded chars into account
+
+1.11.2, 20251224
+-------------------------------------------------------------------------------
+ * fix building with c++20, as reported by R.Heitmann
+ * change character conversions, deprecated in C++17.
