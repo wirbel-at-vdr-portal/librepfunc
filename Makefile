@@ -104,7 +104,8 @@ exec_prefix     ?= $(prefix)
 bindir           = $(exec_prefix)/bin
 sbindir          = $(exec_prefix)/sbin
 libexecdir       = $(exec_prefix)/libexec
-libdir           = $(exec_prefix)/lib
+libsubdir       ?= lib
+libdir           = $(exec_prefix)/$(libsubdir)
 datadir          = $(datarootdir)
 docdir           = $(datarootdir)/doc/$(package_name)
 infodir          = $(datarootdir)/info
@@ -115,7 +116,7 @@ man2dir          = $(mandir)/man2
 man3dir          = $(mandir)/man3
 man4dir          = $(mandir)/man4
 man5dir          = $(mandir)/man5
-pkgconfigdir     = /usr/lib/pkgconfig
+pkgconfigdir     = $(prefix)/$(libsubdir)/pkgconfig
 
 SOURCES  := $(sort $(wildcard $(srcdir)/*.cpp))
 OBJS      = $(SOURCES:.cpp=.o)
@@ -128,7 +129,7 @@ define PKG_DATA
 prefix=$(prefix)
 exec_prefix=$${prefix}
 includedir=$${prefix}/include
-libdir=$${exec_prefix}/lib
+libdir=$${exec_prefix}/$(libsubdir)
 
 Name: librepfunc
 Description: tools library for w_scan_cpp and wirbelscan
